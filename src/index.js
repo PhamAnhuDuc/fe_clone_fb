@@ -3,15 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore , applyMiddleware} from 'redux';
 import appReducers from './reducers/index';
 
 import App from './components/App';
 import * as serviceWorker from './serviceWorker';
+import thunk from 'redux-thunk';
 
 const store = createStore(
-	appReducers, /* preloadedState, */
-	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+	appReducers,
+	applyMiddleware(thunk)
 );
 ReactDOM.render(
 <Provider store={store}>

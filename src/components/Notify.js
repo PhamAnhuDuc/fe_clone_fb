@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {AlertContainer, Alert} from "react-bs-notifier";
-import {connect} from 'react-redux';
+//import {connect} from 'react-redux';
 
 class Notify extends Component {
     render() {
