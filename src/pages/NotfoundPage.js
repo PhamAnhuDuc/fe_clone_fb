@@ -8,7 +8,7 @@ class NotfoundPage extends Component {
                         <h3 className="panel-title">PAGE NOT FOUND</h3>
                   </div>
                   <div className="panel-body">
-                        <img src="image/404.jpg" alt= "PAGE NOT FOUND" />
+                        <img src="/images/404.jpg" alt= "PAGE NOT FOUND" />
                   </div>
             </div>
         );

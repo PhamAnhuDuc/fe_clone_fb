@@ -38,6 +38,8 @@ class Menu extends Component {
 		//if(user.isLogin === true) { //login
 			// menus.push({to: '/task', exact: true, name: 'Task'});
 			// menus.push({to: '/user', exact: true, name: 'User'});
+			menus.push({to: '/home', exact: true, name: 'Home'});
+			menus.push({to: '/profile', exact: false, name: 'Profile'});
 		//}else{
 			menus.push({to: '/signin', exact: true, name: 'Signin'});
 			menus.push({to: '/signup', exact: true, name: 'Signup'});

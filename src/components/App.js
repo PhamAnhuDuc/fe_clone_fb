@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import {
     BrowserRouter as Router,
     Route, 
-    Switch,
+    Switch
 } from 'react-router-dom';
 import routes from './../route-config';
 import Title from './../components/Title';
@@ -23,12 +23,15 @@ class App extends Component {
                         </div>
                         <div className="col-xs-10 col-sm-10 col-md-10 col-lg-10">
                             {this.showRoute(routes)}
+                            {/* { this.RouteConfigExample} */}
                         </div>
                     </div>
                 </div>
             </Router>
         );
     }
+    
+
     showRoute(routes){
         let xhtml=null;
         if(routes.length > 0) {
@@ -40,5 +43,33 @@ class App extends Component {
         }
         return <Switch>{xhtml}</Switch>
     }
+
+
+
 }
+// const RouteConfigExample = () => (
+//     <Router>
+//       <div>
+//         <ul>
+//           <li>
+//             <Link to="/tacos">Tacos</Link>
+//           </li>
+//           <li>
+//             <Link to="/sandwiches">Sandwiches</Link>
+//           </li>
+//         </ul>
+//         {routes.map((route, i) => <RouteWithSubRoutes key={i} {...route} />)}
+//       </div>
+//     </Router>
+//   );
+
+// const RouteWithSubRoutes = route => (
+//     <Route
+//       path={route.path}
+//       render={props => (
+//         // pass the sub-routes down to keep nesting
+//         <route.component {...props} routes={route.routes} />
+//       )}
+//     />
+//   );
 export default App;
