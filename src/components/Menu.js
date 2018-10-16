@@ -32,9 +32,7 @@ class Menu extends Component {
 	}
 	createMenu(){
 		//let {user} = this.props;
-		
 		let menus  = [];
-
 		//if(user.isLogin === true) { //login
 			// menus.push({to: '/task', exact: true, name: 'Task'});
 			// menus.push({to: '/user', exact: true, name: 'User'});
@@ -44,10 +42,8 @@ class Menu extends Component {
 			menus.push({to: '/signin', exact: true, name: 'Signin'});
 			menus.push({to: '/signup', exact: true, name: 'Signup'});
 		//}
-
 		return menus;
 	}
-	
 	showMenus(){
 		let xhtml = null;
 		let menus  = this.createMenu();

@@ -4,11 +4,13 @@ import Account from './../components/Account';
 import YourImages from './../components/YourImages';
 import ListFriend from './../components/ListFriend';
 import NotFound from './../components/NotFound';
+import YourWall from './../components/YourWall';
 
 const menuCourses = [
 	{to: '/image'	, name: 'Ảnh Đại Diện'},
 	{to: '/account'	, name: 'Your Account'},
 	{to: '/list-friend'	, name: 'List Friend'},
+	{to: '/your-wall', name : 'Your Wall'}
 ];
 
 class ProfilePage extends Component {
@@ -18,48 +20,36 @@ class ProfilePage extends Component {
 			images : false,
 			yourAccount : false,
 			listFriend : false,
-		}
-	}
-	onClickMenu = (menu) => {
-		//console.log(menu);
-		if(menu.to === '/account') {
-			this.setState({
-				images : false,
-				yourAccount : true,
-				listFriend : false
-			});
-		}else if(menu.to === '/image') {
-			this.setState({
-				images : true,
-				yourAccount : false,
-				listFriend : false
-			});
-		}else {
-			this.setState({
-				images : false,
-				yourAccount : false,
-				listFriend : true
-			});
+			yourWall : false
 		}
 	}
 
     render() {
-		let {images,yourAccount,listFriend} = this.state,
-		 	{match} = this.props,
+		let {match} = this.props,
 			main = '';
 		let x = window.location.href;
-			x = x.split('/');
-			let lengthURL = x.length;
-		
-		if (images || (((x[lengthURL-2] + '/' + x[lengthURL-1]) === 'profile/image') && lengthURL === 5)) {
-			main = <YourImages />;	
-		}else if(yourAccount  || (((x[lengthURL-2] + '/' + x[lengthURL-1]) === 'profile/account') && lengthURL === 5 )) {
-			main = <Account/>;
-		}else if(listFriend || (((x[lengthURL-2] + '/' + x[lengthURL-1]) === 'profile/list-friend') && lengthURL === 5 )) {
-			main = <ListFriend/>;
-		}else {
-			main = <NotFound/>
+		x = x.split('/');
+		let lengthURL = x.length;
+
+		if (x[lengthURL - 1] === '' ) {
+			x.splice(lengthURL - 1, 1);
+			lengthURL--;
 		}
+
+		if (((x[lengthURL-2] + '/' + x[lengthURL-1]) === 'profile/image') && lengthURL === 5) {
+			main = <YourImages />;	
+		}else if(((x[lengthURL-2] + '/' + x[lengthURL-1]) === 'profile/account') && lengthURL === 5 ) {
+			main = <Account/>;
+		}else if(((x[lengthURL-2] + '/' + x[lengthURL-1]) === 'profile/list-friend') && lengthURL === 5 ) {
+			main = <ListFriend/>;
+		}else if(((x[lengthURL-2] + '/' + x[lengthURL-1]) === 'profile/your-wall') && lengthURL === 5 ) {
+			main = <YourWall/>;
+		}else if((x[lengthURL-1] === 'profile') && lengthURL === 4 ) {
+			main = <YourWall/>;
+		}else {
+			main = <NotFound/>;
+		}
+		
         return(
             <div className="panel panel-info">
 				<div className="panel-heading">
@@ -89,7 +79,7 @@ class ProfilePage extends Component {
 			xhtml = menus.map((menu, index)=> {
 				let urlCourse =  url + menu.to;
 				return (
-					<NavLink key={index} exact to={urlCourse} activeClassName="active" onClick={() => this.onClickMenu(menu) } className="list-group-item">
+					<NavLink key={index} exact to={urlCourse} activeClassName="active" className="list-group-item">
 						{menu.name}
 					</NavLink>
 				);

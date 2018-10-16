@@ -33,3 +33,14 @@ li.list-group-item span.author{
 	font-style: italic;
 	color: #585858;
 }
+
+.post-form {
+	display: block !important;
+}
+
+textarea.form-control {
+    width: 500px;
+}
+.list-post-home {
+	display: inline-block !important;
+}

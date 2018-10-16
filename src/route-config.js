@@ -29,14 +29,14 @@ const router = [
           ]
     },
     {
-        path: '',
-        exact: false,
-        main: () => <NotfoundPage />
-    },
-    {
         path: '/home',
         exact : true,
         main : () => <HomePage />
+    },
+    {
+        path: '',
+        exact: true,
+        main: () => <NotfoundPage />
     },
 
 ];

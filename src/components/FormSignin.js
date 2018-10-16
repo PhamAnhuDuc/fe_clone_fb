@@ -1,7 +1,31 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { actLoginRequest } from './../actions/index';
+import Form from 'react-validation/build/form';
+import Input from 'react-validation/build/input';
+import CheckButton from 'react-validation/build/button';
+import { isEmail, isEmpty } from 'validator';
 
+
+const required = (value) => {
+	if (isEmpty(value)) {
+		return <small className="form-text text-danger">This field is required</small>;
+	}
+  }
+  
+  const email = (value) => {
+	if (!isEmail(value)) {
+		return <small className="form-text text-danger">Invalid email format</small>;
+	}
+  }
+  
+  const minLength = (value) => {
+	if (value.trim().length < 6) {
+		return <small className="form-text text-danger">Password must be at least 6 characters long</small>;
+	}
+  }
+
+  
 class FormSignin extends Component {
 	constructor(props) {
 		super(props);
@@ -10,7 +34,6 @@ class FormSignin extends Component {
 			password : ''
 		}
 	}
-
 	handleChange = (event) => {
 		const target = event.target;    // input selectbox
 		const value = target.type === 'checkbox' ? target.checked : target.value;
@@ -25,32 +48,37 @@ class FormSignin extends Component {
 			email : email,
 			password : password
 		}
-		this.props.onLogin(userLogin);
 		event.preventDefault();
+		this.form.validateAll();
+        if ( this.checkBtn.context._errors.length === 0 ) {
+			this.props.onLogin(userLogin);
+           	//alert('success');
+        }
 	}
 	
     render() {
 		return (
-			<form className="form-horizontal" onSubmit={this.handleSubmit}>
+			<Form className="form-horizontal" onSubmit={this.handleSubmit} ref={c => { this.form = c }} >
 				<div className="form-group">
 					<label htmlFor="inputEmail3" className="col-sm-2 control-label">Email</label>
 					<div className="col-sm-6">
-						<input name="email" value={this.state.email} onChange={this.handleChange} type="text" className="form-control" id="inputEmail3" placeholder="Email" />
+						<Input  validations={[required, minLength]} name="email" value={this.state.email} onChange={this.handleChange} type="text" className="form-control" id="inputEmail3" placeholder="Email" />
 					</div>
 				</div>
 				<div className="form-group">
 					<label htmlFor="inputPassword3" className="col-sm-2 control-label">Password</label>
 					<div className="col-sm-6">
-						<input name="password" value={this.state.password} onChange={this.handleChange} type="text" className="form-control" id="inputPassword3" placeholder="Password" />
+						<Input name="password" value={this.state.password} onChange={this.handleChange} validations={[required, minLength]} type="text" className="form-control" id="inputPassword3" placeholder="Password" />
 					</div>
 				</div>
 
 				<div className="form-group">
 					<div className="col-sm-offset-2 col-sm-6">
 						<button type="submit" className="btn btn-success">Sign in</button>
+						<CheckButton style={{ display: 'none' }} ref={c => { this.checkBtn = c }} />
 					</div>
 				</div>
-			</form>
+			</Form>
 		);
 	}
 }

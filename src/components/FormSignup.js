@@ -2,6 +2,24 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 import { actRegisterRequest } from './../actions/index';
+import FormError from './../components/FormErrror';
+
+const validateInput = (checkingText) => {
+    const regexp = /^\d{10,11}$/; 
+    // regular expression - checking if phone number contains only 10 - 11 numbers
+    
+    if (regexp.exec(checkingText) !== null) {
+            return {
+                isInputValid: true,
+                errorMessage: ''
+            };
+        } else {
+            return {
+                isInputValid: false,
+                errorMessage: 'Số điện thoại phải có 10 - 11 chữ số.'
+            };
+        }
+}
 
 class FormSignup extends Component {
 	constructor(props) {
@@ -13,6 +31,10 @@ class FormSignup extends Component {
 			password_confirm: '',
 			phone : '',
 			address : '',
+
+			value: '',  //validate
+        	isInputValid: true, 
+        	errorMessage: ''
 		}
 	}
 	handleChange = (event) => {
@@ -22,6 +44,13 @@ class FormSignup extends Component {
 		this.setState({
 			[name]: value
 		});
+	}
+	handleInputValidation  = (event) => {
+		const { isInputValid, errorMessage } = validateInput(this.state.value);
+		this.setState({
+			isInputValid: isInputValid,
+			errorMessage: errorMessage
+		})
 	}
 	onSave = (event) => {
 		event.preventDefault();
@@ -45,7 +74,14 @@ class FormSignup extends Component {
                 <div className="form-group">
 					<label htmlFor="full_name3" className="col-sm-2 control-label">Full Name</label>
 					<div className="col-sm-6">
-						<input name="full_name" value={this.state.full_name} onChange={this.handleChange} type="text" className="form-control" id="full_name3" placeholder="Your Full Name" />
+						<input name="full_name" 
+							value={this.state.full_name} type="text" className="form-control" id="full_name3" placeholder="Your Full Name"
+							onChange={this.handleChange}
+							onBlur = { this.handleInputValidation}
+						/>
+						<FormError 
+							isHidden={this.state.isInputValid} 
+							errorMessage={this.state.errorMessage} />
 					</div>
 				</div>
 				<div className="form-group">
@@ -55,11 +91,6 @@ class FormSignup extends Component {
 					</div>
 				</div>
                 <div className="form-group">
-				{
-					message === undefined  ? '' : <div>aaaaaaaaaaaa</div>
-						
-			
-				}
 					<label htmlFor="inputPassword3" className="col-sm-2 control-label">Password</label>
 					<div className="col-sm-6">
 						<input name="password" value={this.state.password} onChange={this.handleChange}  type="text" className="form-control" id="inputPassword3" placeholder="Password" />
