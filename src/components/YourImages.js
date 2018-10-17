@@ -40,11 +40,10 @@ class YourImages extends Component {
                     </div>
                     <div className="panel-body">
                         <div className="text-center">
-                        <img alt="profile-image" src="/images/739_DucPA.jpg" id="blah" alt="DucPA" aria-hidden="true" role="presentation"  />
-                        <div className="cropper-buttons clearfix">
-                            <input onChange={this.onChange} accept="image/*" type="file" id="imgInp" className="my_file" name="avatar" required={true} />
-                        </div>
-                        
+                            <img alt="profile-image" src="/images/739_DucPA.jpg" id="blaha" alt="DucPA234" aria-hidden="true" role="presentation"  />
+                            <div className="cropper-buttons clearfix">
+                                <input onChange={this.onChange} accept="image/*" type="file" id="imgInp" className="my_file" name="avatar" required={true} />
+                            </div>
                         </div>
                     </div>
                     <div className="panel-footer text-center">

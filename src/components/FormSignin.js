@@ -52,7 +52,6 @@ class FormSignin extends Component {
 		this.form.validateAll();
         if ( this.checkBtn.context._errors.length === 0 ) {
 			this.props.onLogin(userLogin);
-           	//alert('success');
         }
 	}
 	

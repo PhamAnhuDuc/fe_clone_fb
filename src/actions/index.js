@@ -1,11 +1,21 @@
 import * as types from './../constants/ActionType';
 import callApi from './../utils/index';
 
-//API 
+
+
+export const actChangeNotify = (style, title, content) => {
+	return {
+		type : types.CHANGE_NOTIFY,
+		style, title, content
+	}
+}
+
+//API - all 
 export const actRegisterRequest = (userRegister) => {
     return dispatch => {
         return callApi('user/register', 'POST', userRegister).then(res => {
             dispatch(actRegister(res.data));
+            //console.log(res);
         })
     }
 }

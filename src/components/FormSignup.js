@@ -1,25 +1,10 @@
 import React, { Component } from 'react';
-
 import { connect } from 'react-redux';
 import { actRegisterRequest } from './../actions/index';
-import FormError from './../components/FormErrror';
-
-const validateInput = (checkingText) => {
-    const regexp = /^\d{10,11}$/; 
-    // regular expression - checking if phone number contains only 10 - 11 numbers
-    
-    if (regexp.exec(checkingText) !== null) {
-            return {
-                isInputValid: true,
-                errorMessage: ''
-            };
-        } else {
-            return {
-                isInputValid: false,
-                errorMessage: 'Số điện thoại phải có 10 - 11 chữ số.'
-            };
-        }
-}
+import Validate from './../libs/Validate.js';
+import Form from 'react-validation/build/form';
+import Input from 'react-validation/build/input';
+import CheckButton from 'react-validation/build/button';
 
 class FormSignup extends Component {
 	constructor(props) {
@@ -30,11 +15,7 @@ class FormSignup extends Component {
 			password : '',
 			password_confirm: '',
 			phone : '',
-			address : '',
-
-			value: '',  //validate
-        	isInputValid: true, 
-        	errorMessage: ''
+			address : ''
 		}
 	}
 	handleChange = (event) => {
@@ -45,13 +26,7 @@ class FormSignup extends Component {
 			[name]: value
 		});
 	}
-	handleInputValidation  = (event) => {
-		const { isInputValid, errorMessage } = validateInput(this.state.value);
-		this.setState({
-			isInputValid: isInputValid,
-			errorMessage: errorMessage
-		})
-	}
+	
 	onSave = (event) => {
 		event.preventDefault();
 		let {full_name,email,password,password_confirm,phone,address} = this.state;
@@ -63,63 +38,73 @@ class FormSignup extends Component {
 			phone : phone,
 			address : address
 		}
-		this.props.onAddUserRegister(userRegister);
+		//console.log(userRegister);
+		this.form.validateAll();
+		if ( this.checkBtn.context._errors.length === 0 ) {
+			this.props.onAddUserRegister(userRegister);
+        }
 	}
 	
-    render() {
+	render() {
 		let {message} = this.props;
-		console.log(message);
+		let error = {
+			email: '',
+			password: '',
+		}
+		// console.log(message);
+		
+		//console.log(error.password);
         return (
-            <form className="form-horizontal" onSubmit={this.onSave}>
+            <Form className="form-horizontal" onSubmit={this.onSave} ref={c => { this.form = c }} >
                 <div className="form-group">
 					<label htmlFor="full_name3" className="col-sm-2 control-label">Full Name</label>
 					<div className="col-sm-6">
-						<input name="full_name" 
+						<Input name="full_name" 
 							value={this.state.full_name} type="text" className="form-control" id="full_name3" placeholder="Your Full Name"
-							onChange={this.handleChange}
-							onBlur = { this.handleInputValidation}
+							onChange={this.handleChange} 
+							validations={[Validate.required, Validate.minLength]}
 						/>
-						<FormError 
-							isHidden={this.state.isInputValid} 
-							errorMessage={this.state.errorMessage} />
 					</div>
 				</div>
 				<div className="form-group">
 					<label htmlFor="email3" className="col-sm-2 control-label">Email</label>
 					<div className="col-sm-6">
-						<input name="email" value={this.state.email} onChange={this.handleChange} type="email" className="form-control" id="email3" placeholder="Your Email" />
+						<Input name="email" validations={[Validate.required, Validate.minLength, Validate.email]} value={this.state.email} onChange={this.handleChange} type="email" className="form-control" id="email3" placeholder="Your Email" />
 					</div>
+					{message === undefined ? '' : message.email}
 				</div>
                 <div className="form-group">
 					<label htmlFor="inputPassword3" className="col-sm-2 control-label">Password</label>
 					<div className="col-sm-6">
-						<input name="password" value={this.state.password} onChange={this.handleChange}  type="text" className="form-control" id="inputPassword3" placeholder="Password" />
+						<Input name="password" validations={[Validate.required, Validate.minLength]} value={this.state.password} onChange={this.handleChange}  type="text" className="form-control" id="inputPassword3" placeholder="Password" />
 					</div>
+					{error.password}
 				</div>
 				<div className="form-group">
 					<label htmlFor="inputPassword4" className="col-sm-2 control-label">Password confirm</label>
 					<div className="col-sm-6">
-						<input name="password_confirm" value={this.state.password_confirm} onChange={this.handleChange}  type="text" className="form-control" id="inputPassword4" placeholder="Password confirm" />
+						<Input name="password_confirm" validations={[Validate.required, Validate.minLength]} value={this.state.password_confirm} onChange={this.handleChange}  type="text" className="form-control" id="inputPassword4" placeholder="Password confirm" />
 					</div>
 				</div>
                 <div className="form-group">
 					<label htmlFor="phone3" className="col-sm-2 control-label">Phone</label>
 					<div className="col-sm-6">
-						<input name="phone" value={this.state.phone} onChange={this.handleChange}  type="text" className="form-control" id="phone3" placeholder="Your Phone" />
+						<Input name="phone" validations={[Validate.required, Validate.minLength,Validate.validateInputPhone]} value={this.state.phone} onChange={this.handleChange}  type="text" className="form-control" id="phone3" placeholder="Your Phone" />
 					</div>
 				</div>
                 <div className="form-group">
 					<label htmlFor="address3" className="col-sm-2 control-label">Address:</label>
 					<div className="col-sm-6">
-						<input name="address" value = {this.state.address} onChange={this.handleChange} type="text" className="form-control" id="address3" placeholder="Your Address" />
+						<Input name="address" validations={[Validate.required, Validate.minLength]} value = {this.state.address} onChange={this.handleChange} type="text" className="form-control" id="address3" placeholder="Your Address" />
 					</div>
 				</div>
                 <div className="form-group">
                     <div className="col-sm-10 col-sm-offset-2">
                         <button type="submit" className="btn btn-success">Sign Up</button>
+						<CheckButton style={{ display: 'none' }} ref={c => { this.checkBtn = c }} />
                     </div>
                 </div>
-            </form>
+            </Form>
         );
     }
 }
@@ -127,6 +112,7 @@ class FormSignup extends Component {
 const mapDispatchToProps = (dispatch, props) => {
 	return {
 		onAddUserRegister : (userRegister) => {
+			//console.log("userRegister" + userRegister);
 			dispatch(actRegisterRequest(userRegister));
 		}
 	}
@@ -134,7 +120,7 @@ const mapDispatchToProps = (dispatch, props) => {
 const mapStateToProps = state => {
 	// console.log('asdasdasdasd', state);
     return {
-        message: state.user.data_register.detail
+        message: state.user.messages
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(FormSignup);
