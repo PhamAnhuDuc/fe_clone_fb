@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 class ListPostHome extends Component {
+    
     render() {
         return(
             <div className="media list-post-home">

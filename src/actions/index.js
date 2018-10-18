@@ -42,3 +42,9 @@ export const actLogin = (userLogin) => {
         payload: userLogin
     }
 }
+
+export const actLogout = () => {
+	return {
+		type : types.USER_LOGOUT
+	}
+}

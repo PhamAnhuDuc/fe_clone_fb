@@ -1,13 +1,14 @@
 import * as types from './../constants/ActionType';
 
 let defaultState = {
-    //user_login : false,
-    full_name : '',
-    email : '',
-    password : '',
-    phone : '',
-    address : '',
-    data_register: {}
+    isLogin : false,
+    info: {
+        full_name : '',
+        email : '',
+        password : '',
+        phone : '',
+        address : '',
+    }
 }
 
 const user = (state = defaultState, action) => {
@@ -23,11 +24,20 @@ const user = (state = defaultState, action) => {
 
             }
         case types.USER_LOGIN:
-            //console.log(action.payload);
+            //console.log('aaa');
+            if(action.payload.message === 'Login Success'){
+                state.isLogin = true;
+                localStorage.setItem("isLogIn", 'true');
+            }
             return  {
                 ...state,
                 data_user: action.payload 
             }
+        case types.USER_LOGOUT: 
+            state.isLogin = false;
+            localStorage.setItem("isLogIn", 'false');
+            state.info = { full_name : '', email : '', password : '', phone : '', address : '' };
+            return {...state}
         default:
             return state;
     }

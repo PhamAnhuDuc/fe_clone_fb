@@ -6,6 +6,7 @@ import SigninPage from './pages/SigninPage';
 import SignupPage from './pages/SingupPage';
 import HomePage from './pages/HomePage';
 import Account from './components/Account';
+import SearchPage from './pages/SearchPage';
 const router = [
     {
         path: '/signin',
@@ -34,10 +35,16 @@ const router = [
         main : () => <HomePage />
     },
     {
+        path: '/search',
+        exact : true,
+        main : () => <SearchPage />
+    },
+    {
         path: '',
         exact: true,
         main: () => <NotfoundPage />
     },
+
 
 ];
 export default router;

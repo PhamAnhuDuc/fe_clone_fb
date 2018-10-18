@@ -41,6 +41,7 @@ class Menu extends Component {
 		//}else{
 			menus.push({to: '/signin', exact: true, name: 'Signin'});
 			menus.push({to: '/signup', exact: true, name: 'Signup'});
+			menus.push({to: '/search', exact: true, name: 'Search'});
 		//}
 		return menus;
 	}

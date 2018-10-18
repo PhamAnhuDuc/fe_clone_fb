@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
-
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import FormSignin from './../components/FormSignin';
 
 class SinginPage extends Component {
     render() {
+		let {user} = this.props;
+		if(user.isLogin === true) {
+			return <Redirect to="/profile" />;
+		}
         return(
             <div className="panel panel-info">
 				<div className="panel-heading">
@@ -16,4 +21,10 @@ class SinginPage extends Component {
         ); 
     }
 }
-export default SinginPage;
+const mapStateToProp = state => {
+	//console.log(state);
+	return {
+		user : state.user
+	}
+}
+export default connect(mapStateToProp,null)(SinginPage);

@@ -38,7 +38,6 @@ class FormSignup extends Component {
 			phone : phone,
 			address : address
 		}
-		//console.log(userRegister);
 		this.form.validateAll();
 		if ( this.checkBtn.context._errors.length === 0 ) {
 			this.props.onAddUserRegister(userRegister);
@@ -47,13 +46,6 @@ class FormSignup extends Component {
 	
 	render() {
 		let {message} = this.props;
-		let error = {
-			email: '',
-			password: '',
-		}
-		// console.log(message);
-		
-		//console.log(error.password);
         return (
             <Form className="form-horizontal" onSubmit={this.onSave} ref={c => { this.form = c }} >
                 <div className="form-group">
@@ -78,7 +70,6 @@ class FormSignup extends Component {
 					<div className="col-sm-6">
 						<Input name="password" validations={[Validate.required, Validate.minLength]} value={this.state.password} onChange={this.handleChange}  type="text" className="form-control" id="inputPassword3" placeholder="Password" />
 					</div>
-					{error.password}
 				</div>
 				<div className="form-group">
 					<label htmlFor="inputPassword4" className="col-sm-2 control-label">Password confirm</label>
@@ -112,13 +103,11 @@ class FormSignup extends Component {
 const mapDispatchToProps = (dispatch, props) => {
 	return {
 		onAddUserRegister : (userRegister) => {
-			//console.log("userRegister" + userRegister);
 			dispatch(actRegisterRequest(userRegister));
 		}
 	}
 }
 const mapStateToProps = state => {
-	// console.log('asdasdasdasd', state);
     return {
         message: state.user.messages
     }
