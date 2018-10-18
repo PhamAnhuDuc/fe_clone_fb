@@ -1,5 +1,7 @@
 import * as types from './../constants/ActionType';
 
+
+
 let defaultState = {
     isLogin : false,
     info: {
@@ -24,18 +26,18 @@ const user = (state = defaultState, action) => {
 
             }
         case types.USER_LOGIN:
-            //console.log('aaa');
             if(action.payload.user){
-                state.isLogin = true;
                 localStorage.setItem("isLogIn", 'true');
+                localStorage.setItem("access-token", action.payload.user.access_token);
+                localStorage.setItem("idUserLogin", action.payload.user.id);
             }
             return  {
                 ...state,
                 data_user: action.payload 
             }
         case types.USER_LOGOUT: 
-            state.isLogin = false;
             localStorage.setItem("isLogIn", 'false');
+            localStorage.setItem("idUserLogin", '');
             state.info = { full_name : '', email : '', password : '', phone : '', address : '' };
             return {
                 ...state,

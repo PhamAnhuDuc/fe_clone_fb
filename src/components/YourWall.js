@@ -9,7 +9,7 @@ class YourWall extends Component {
 
     handleLogOut = (e) => {
         this.props.LogOut();
-        this.setState({})
+        this.setState({});
     }
 
     render() {

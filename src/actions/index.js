@@ -1,7 +1,10 @@
 import * as types from './../constants/ActionType';
 import callApi from './../utils/index';
 
-
+let headers = {
+    'Content-Type': 'application/json',
+    'access-token': localStorage.getItem('access-token'),
+}
 
 export const actChangeNotify = (style, title, content) => {
 	return {
@@ -46,5 +49,25 @@ export const actLogin = (userLogin) => {
 export const actLogout = () => {
 	return {
 		type : types.USER_LOGOUT
+	}
+}
+
+
+
+//API POST Bài viết
+export const actPostRequest = (post) => {
+    return dispatch => {
+        return callApi('post', 'POST', post, headers).then(res => {
+            dispatch(actPost(res.data));
+        })
+    }
+}
+
+export const actPost = (post) => {
+    console.log(post);
+	return {
+        type : types.POST_CONTENT,
+        post,
+        
 	}
 }
