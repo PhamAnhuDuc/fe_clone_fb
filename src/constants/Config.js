@@ -1,1 +1,1 @@
-export const API_URL = 'http://homestead.test';
+export const API_URL = 'http://localhost:8000';

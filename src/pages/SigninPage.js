@@ -5,8 +5,8 @@ import FormSignin from './../components/FormSignin';
 
 class SinginPage extends Component {
     render() {
-		let {user} = this.props;
-		if(user.isLogin === true) {
+		let isLogin = localStorage.getItem("isLogIn");
+		if(isLogin === 'true') {
 			return <Redirect to="/profile" />;
 		}
         return(

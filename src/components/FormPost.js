@@ -1,7 +1,7 @@
 import Form from 'react-validation/build/form';
-import Input from 'react-validation/build/input';
-import Textarea from 'react-validation/build/textarea';
-import Validate from './../libs/Validate.js';
+// import Input from 'react-validation/build/input';
+// import Textarea from 'react-validation/build/textarea';
+// import Validate from './../libs/Validate.js';
 import React, { Component } from 'react';
 
 class FormPost extends Component {

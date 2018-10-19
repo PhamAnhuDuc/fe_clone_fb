@@ -25,7 +25,7 @@ const user = (state = defaultState, action) => {
             }
         case types.USER_LOGIN:
             //console.log('aaa');
-            if(action.payload.message === 'Login Success'){
+            if(action.payload.user){
                 state.isLogin = true;
                 localStorage.setItem("isLogIn", 'true');
             }
@@ -37,7 +37,9 @@ const user = (state = defaultState, action) => {
             state.isLogin = false;
             localStorage.setItem("isLogIn", 'false');
             state.info = { full_name : '', email : '', password : '', phone : '', address : '' };
-            return {...state}
+            return {
+                ...state,
+            }
         default:
             return state;
     }

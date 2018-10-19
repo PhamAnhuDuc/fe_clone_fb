@@ -9,13 +9,15 @@ class YourWall extends Component {
 
     handleLogOut = (e) => {
         this.props.LogOut();
+        this.setState({})
     }
 
     render() {
-        let isLogin = (localStorage.getItem("isLogIn"));
+        let isLogin = localStorage.getItem("isLogIn");
         if(isLogin !== 'true') {
             return <Redirect to='/signin'/>;
         }
+
         return(
             <div>
                 <div className="page-header">
