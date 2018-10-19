@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import FormSearch from './../components/FormSearch';
-import SearchBy from './../components/SearchBy';
-
+import Item from './../components/Item';
 class SearchPage extends Component {
     render() {
         return(
@@ -11,7 +10,8 @@ class SearchPage extends Component {
 				</div>
 				<div className="panel-body">
 					<FormSearch />
-                    <SearchBy/>
+					<Item>
+					</Item>
 				</div>
 			</div>
         ); 

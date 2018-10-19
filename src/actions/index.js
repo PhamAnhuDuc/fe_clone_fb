@@ -1,11 +1,6 @@
 import * as types from './../constants/ActionType';
 import callApi from './../utils/index';
 
-let headers = {
-    'Content-Type': 'application/json',
-    'access-token': localStorage.getItem('access-token'),
-}
-
 export const actChangeNotify = (style, title, content) => {
 	return {
 		type : types.CHANGE_NOTIFY,
@@ -40,6 +35,7 @@ export const actLoginRequest = (userLogin) => {
 }
 //hành động đăng kí và truyền vào thông tin để đăng kí
 export const actLogin = (userLogin) => {
+    
     return {
         type : types.USER_LOGIN,
         payload: userLogin
@@ -56,8 +52,9 @@ export const actLogout = () => {
 
 //API POST Bài viết
 export const actPostRequest = (post) => {
+    
     return dispatch => {
-        return callApi('post', 'POST', post, headers).then(res => {
+        return callApi('post', 'POST', post, {'access-token': localStorage.getItem('access-token')}).then(res => {
             dispatch(actPost(res.data));
         })
     }
@@ -71,3 +68,54 @@ export const actPost = (post) => {
         
 	}
 }
+
+// api GET LITS FIEND
+
+export const getAllListFriend = () => {
+    return dispatch => {
+        return callApi('list-friend', 'GET', null, {'access-token': localStorage.getItem('access-token')}).then(res => {
+            dispatch(actListFriend(res.data));
+        })
+    }
+}
+
+export const actListFriend = (listFriend) => {
+    return {
+        type : types.SHOW_LIST_FRIEND,
+        listFriend
+    }
+}
+
+//SEARCH REQUEST
+export const getSearchRequest = (search,sortBy) => {
+    let name = sortBy;
+    return dispatch => {
+        return callApi(`user/search?${name}=${search}`, 'GET', null).then(res => {
+            dispatch(actSearch(res.data));
+        })
+    }
+}
+
+export const actSearch = (search) => {
+    return {
+        type : types.SEARCH,
+        search
+    }
+}
+
+//ADD FRIEND REQUEST
+export const addFriendRequest = (id) => {
+    return dispatch => {
+        return callApi(`user/add-friend/${id}`, 'GET', null, {'access-token': localStorage.getItem('access-token')}).then(res => {
+            dispatch(actAddFriend(res.data));
+        })
+    }
+}
+
+export const actAddFriend = (id) => {
+    return {
+        type : types.ADD_FRIEND,
+        id
+    }
+}
+

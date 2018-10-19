@@ -10,7 +10,9 @@ let defaultState = {
         password : '',
         phone : '',
         address : '',
-    }
+    },
+    resultSearch:'',
+    friendship: '',
 }
 
 const user = (state = defaultState, action) => {
@@ -36,12 +38,30 @@ const user = (state = defaultState, action) => {
                 data_user: action.payload 
             }
         case types.USER_LOGOUT: 
-            localStorage.setItem("isLogIn", 'false');
-            localStorage.setItem("idUserLogin", '');
+            localStorage.removeItem("access-token");
+            localStorage.removeItem("isLogIn");
+            localStorage.removeItem("idUserLogin");
             state.info = { full_name : '', email : '', password : '', phone : '', address : '' };
             return {
                 ...state,
             }
+
+        case types.SEARCH: 
+            console.log(action.search.users);
+            return {
+                ...state,
+                resultSearch : action.search.users
+               
+            }
+
+        case types.ADD_FRIEND: {
+            // console.log(action.flag);
+            // console.log(action.id.flag);
+            return {
+                ...state,
+                friendship : action.id.flag
+            }
+        }
         default:
             return state;
     }
