@@ -43,7 +43,7 @@ class FormPost extends Component {
         let contentPost = {
             content : content,
             urlImg : result,
-            target_user_id : 33
+            target_user_id : 1
         }
         console.log(contentPost);
         this.props.postReuslt(contentPost);

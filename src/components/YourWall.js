@@ -13,10 +13,11 @@ class YourWall extends Component {
     }
 
     render() {
-        let isLogin = (localStorage.getItem("isLogIn"));
+        let isLogin = localStorage.getItem("isLogIn");
         if(isLogin !== 'true') {
             return <Redirect to='/signin'/>;
         }
+
         return(
             <div>
                 <div className="page-header">
