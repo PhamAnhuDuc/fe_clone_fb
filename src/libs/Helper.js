@@ -1,5 +1,5 @@
 class Helpers {
-	static convertString(string)  {
+	static showItems(string)  {
         var regex = /-/g;
         var stringResult = string.replace(regex,' ');
 		// if(position === "left"){

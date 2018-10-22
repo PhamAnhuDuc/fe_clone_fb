@@ -80,6 +80,7 @@ export const getAllListFriend = () => {
 }
 
 export const actListFriend = (listFriend) => {
+    // console.log(listFriend);
     return {
         type : types.SHOW_LIST_FRIEND,
         listFriend
@@ -118,4 +119,19 @@ export const actAddFriend = (id) => {
         id
     }
 }
+// API DELETE
+export const deleteRequest = (id) => {
+    return dispatch => {
+        return callApi(`user/delete-friend/${id}`, 'DELETE', null, {'access-token': localStorage.getItem('access-token')}).then(res => {
+            dispatch(actDeleteFriend(id,res.data)); 
+        })
+    }
+}
 
+export const actDeleteFriend = (id ,data) => {
+    return {
+        type : types.DELETE_FRIEND,
+        id,
+        payload : data
+    }
+}

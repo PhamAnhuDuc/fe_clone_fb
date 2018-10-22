@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import FormSearch from './../components/FormSearch';
-import Item from './../components/Item';
+import ListItem from '../components/ListItem';
+import Item from '../components/Item';
+import { connect } from 'react-redux';
+import { addFriendRequest } from '../actions/index';
+
 class SearchPage extends Component {
+
     render() {
+		let {items} = this.props;
         return(
             <div className="panel panel-info">
 				<div className="panel-heading">
@@ -10,12 +16,38 @@ class SearchPage extends Component {
 				</div>
 				<div className="panel-body">
 					<FormSearch />
-					<Item>
-					</Item>
+					<ListItem>
+						{this.showItem(items)}
+					</ListItem>
 				</div>
 			</div>
         ); 
-    }
+	}
+	showItem(items){
+		let result = null;
+		if(items.length > 0) {
+			result = items.map((item,index) => {
+				return (
+					<Item item = {item} index = {index} key={index} />
+				); 
+			});
+		}
+		return result;
+	}
 }
 
-export default (SearchPage);
+const mapStateToProps = state => {
+	return {
+		items : state.user.resultSearch,
+	}
+}
+
+const mapDispactToProps = (dispatch, props) => {
+	return {
+		onAdd : (id) => {
+			dispatch(addFriendRequest(id));
+		}
+	}
+}
+
+export default connect (mapStateToProps, mapDispactToProps)(SearchPage);

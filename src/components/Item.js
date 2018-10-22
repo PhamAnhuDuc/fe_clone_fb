@@ -1,51 +1,33 @@
 import React, { Component } from 'react';
-import { connect }  from 'react-redux';
-import ChildItem from './ChildItem';
+import { connect } from 'react-redux';
+import { addFriendRequest } from '../actions/index';
+
 class Item extends Component {
+    handlerAdd = (id) => {
+        if(confirm("ban chac chan muon add ?")){ //eslint-disable-line
+            this.props.onAdd(id);
+        }
+    }
     render() {
-        let {totalSearch} = this.props;
-        console.log(totalSearch);
+        let { item, index } = this.props;
+        //console.log(item);
         return(
-            <table className="table table-hover">
-                <thead>
-                <tr>
-                    <th>STT</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Add</th>
-                </tr>
-                </thead>
-                <tbody>
-                    {this.showChilItem(totalSearch)}
-                </tbody>
-            </table>
+            <tr>
+                <td>{index + 1}</td>
+                <td>{item.full_name}</td>
+                <td>{item.email}</td>
+                <td> 
+                    <button type="button" className="btn btn-primary"  onClick={() => this.handlerAdd(item.id)} >Add</button>
+                </td>
+            </tr> 
         );
     }
-    showChilItem(childs) {
-        var result = null;
-        if (childs.length > 0) {
-            result = childs.map((child, index) => {
-                return (
-                    <ChildItem
-                        key={index}
-                        child={child}
-                        index={index}
-                    />
-                );
-            });
-        }
-        return result;
-    }
 }
-
-const mapStateToProps = state => {
-    return {
-        totalSearch : state.user.resultSearch
-    }
+const mapDispactToProps = (dispatch, props) => {
+	return {
+		onAdd : (id) => {
+			dispatch(addFriendRequest(id));
+		}
+	}
 }
-export default connect (mapStateToProps, null)(Item);
-
-
-
-
-
+export default connect ( null, mapDispactToProps)(Item);
