@@ -10,3 +10,4 @@ export const SHOW_LIST_FRIEND = 'SHOW_LIST_FRIEND';
 export const SEARCH = 'SEARCH';
 export const ADD_FRIEND  = 'ADD_FRIEND';
 export const DELETE_FRIEND = 'DELETE_FRIEND';
+export const GET_USER = 'GET_USER';

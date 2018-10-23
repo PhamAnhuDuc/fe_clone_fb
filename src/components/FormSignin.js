@@ -5,7 +5,8 @@ import Form from 'react-validation/build/form';
 import Input from 'react-validation/build/input';
 import CheckButton from 'react-validation/build/button';
 import { isEmail, isEmpty } from 'validator';
-
+import { actChangeNotify} from './../actions/index';
+import * as notify from './../constants/Notify';
 
 const required = (value) => {
 	if (isEmpty(value)) {
@@ -81,11 +82,12 @@ class FormSignin extends Component {
 		);
 	}
 }
+
 const mapDispatchToProps = (dispatch, props) => {
 	return {
 		onLogin : (userLogin) => {
 			dispatch(actLoginRequest(userLogin));
-		}
+		},
 	}
 }
 export default connect(null,mapDispatchToProps)(FormSignin);

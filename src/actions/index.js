@@ -1,13 +1,17 @@
 import * as types from './../constants/ActionType';
 import callApi from './../utils/index';
 
-export const actChangeNotify = (style, title, content) => {
-	return {
-		type : types.CHANGE_NOTIFY,
-		style, title, content
-	}
-}
-
+// export const actChangeNotify = (style, title, content) => {
+// 	return {
+// 		type : types.CHANGE_NOTIFY,
+// 		style, title, content
+// 	}
+// }
+// export const actHideNotify = () => {
+// 	return {
+// 		type : types.HIDE_NOTIFY,
+// 	}
+// }
 //API - all 
 export const actRegisterRequest = (userRegister) => {
     return dispatch => {
@@ -52,7 +56,6 @@ export const actLogout = () => {
 
 //API POST Bài viết
 export const actPostRequest = (post) => {
-    
     return dispatch => {
         return callApi('post', 'POST', post, {'access-token': localStorage.getItem('access-token')}).then(res => {
             dispatch(actPost(res.data));
@@ -61,7 +64,6 @@ export const actPostRequest = (post) => {
 }
 
 export const actPost = (post) => {
-    console.log(post);
 	return {
         type : types.POST_CONTENT,
         post,
@@ -135,3 +137,20 @@ export const actDeleteFriend = (id ,data) => {
         payload : data
     }
 }
+
+// get 1 user 
+export const actGetUserRequest = (id) => {
+    return dispatch => {
+        return callApi(`user/get-user/${id}`, 'GET', null, {'access-token': localStorage.getItem('access-token')}).then(res => {
+            dispatch(actGetUser(res.data));
+        })
+    }
+}
+export const actGetUser = (user) => {
+	return {
+        type : types.GET_USER,
+        user,
+        
+	}
+}
+

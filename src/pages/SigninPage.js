@@ -22,7 +22,6 @@ class SinginPage extends Component {
     }
 }
 const mapStateToProp = state => {
-	//console.log(state);
 	return {
 		user : state.user
 	}

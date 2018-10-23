@@ -6,9 +6,6 @@ import YourImages from './../components/YourImages';
 import ListFriend from './../components/ListFriend';
 import NotFound from './../components/NotFound';
 import YourWall from './../components/YourWall';
-import Friend from './../components/Friend';
-import { connect } from 'react-redux';
-import { getAllListFriend } from '../actions/index';
 
 
 
@@ -30,9 +27,7 @@ class ProfilePage extends Component {
 			yourWall : false
 		}
 	}
-	componentDidMount() {
-        this.props.fetchAllFriends();
-    }
+	
     render() {
 		let {friends} = this.props; 
 		let {match} = this.props,
@@ -51,7 +46,7 @@ class ProfilePage extends Component {
 		}else if(((x[lengthURL-2] + '/' + x[lengthURL-1]) === 'profile/account') && lengthURL === 5 ) {
 			main = <Account/>;
 		}else if(((x[lengthURL-2] + '/' + x[lengthURL-1]) === 'profile/list-friend') && lengthURL === 5 ) {
-			main = <ListFriend friends = {friends} ></ListFriend>;
+			main = <ListFriend></ListFriend>;
 		}else if(((x[lengthURL-2] + '/' + x[lengthURL-1]) === 'profile/your-wall') && lengthURL === 5 ) {
 			main = <YourWall/>;
 		}else if((x[lengthURL-1] === 'profile') && lengthURL === 4 ) {
@@ -96,29 +91,7 @@ class ProfilePage extends Component {
 		}
     	return xhtml;
 	}
-	// showFriend = (friends) => {
-	// 	let result = null;
-	// 	if(friends.length > 0){
-	// 		result = friends.map((friend, index ) => {
-	// 			return (
-	// 				<Friend friend = {friend} index = {index} key={index} />
-	// 			);
-	// 		});
-	// 	}
-	// 	return result;
-	// }
-}
-const mapStateToProps = state => {
-	return {
-		friends : state.user.listFriend
-	}
-}
-const mapDispatchToProp = (dispatch, props) => {
-    return {
-        fetchAllFriends : () =>{
-            dispatch(getAllListFriend());
-        }
-    }
 }
 
-export default connect(mapStateToProps , mapDispatchToProp) (ProfilePage);
+
+export default ProfilePage;

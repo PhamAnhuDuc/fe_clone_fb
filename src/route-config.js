@@ -7,6 +7,9 @@ import SignupPage from './pages/SingupPage';
 import HomePage from './pages/HomePage';
 import Account from './components/Account';
 import SearchPage from './pages/SearchPage';
+import Friend from './components/Friend';
+import FriendPage from './pages/FriendPage';
+
 const router = [
     {
         path: '/signin',
@@ -38,6 +41,11 @@ const router = [
         path: '/search',
         exact : true,
         main : () => <SearchPage />
+    },
+    {
+        path: '/user/:id',
+        exact : false,
+        main : (match , history) => <FriendPage {...match} />
     },
     {
         path: '',

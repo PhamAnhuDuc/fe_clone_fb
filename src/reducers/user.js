@@ -7,24 +7,16 @@ var findIndex = (friends, id) => {
             result = index;
         }
     });
-    console.log(result);
-    
     return result;
 }
 
-
 let defaultState = {
-    isLogin : false,
-    // info: {
-    //     full_name : '',
-    //     email : '',
-    //     password : '',
-    //     phone : '',
-    //     address : '',
-    // },
-    resultSearch:'',
+    isLogin : '',
+    resultSearch:[],
     friendship: '',
-    listFriend: ''
+    listFriend: '',
+    messages: '',
+    getUser:'' ,
 }
 
 const user = (state = defaultState, action) => {
@@ -41,20 +33,22 @@ const user = (state = defaultState, action) => {
                 messages : messages
             }
         case types.USER_LOGIN:
-            if(action.payload.user){
+            state = action.payload.message;
+            //console.log(action.payload.message);
+            if(action.payload.user.id){
                 localStorage.setItem("isLogIn", 'true');
                 localStorage.setItem("access-token", action.payload.user.access_token);
                 localStorage.setItem("idUserLogin", action.payload.user.id);
             }
             return  {
                 ...state,
-                data_user: action.payload 
+                messages : action.payload.message
             }
         case types.USER_LOGOUT: 
             localStorage.removeItem("access-token");
             localStorage.removeItem("isLogIn");
             localStorage.removeItem("idUserLogin");
-            //state.info = { full_name : '', email : '', password : '', phone : '', address : '' };
+            state.isLogin = false;
             return {
                 ...state,
             }
@@ -86,17 +80,14 @@ const user = (state = defaultState, action) => {
         case types.DELETE_FRIEND:
             
             index = findIndex(state.listFriend,id);
-            state.listFriend.splice(index, 1);
-            alert(index);
-            console.log(state);
-            
-            // listFriend = listFriend.splice(index, 1);
-            // console.log(listFriend)
+            state.listFriend = state.listFriend.filter((friend, i) => i !== index);
             return {
                 ...state,
-               
             }
         
+        case types.GET_USER:
+            state.getUser = action.user;
+            return {...state}
         default:
             return state;
     }

@@ -13,6 +13,7 @@ class FormPost extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.fileInput = React.createRef();
+        
     }
     onDrop(picture) {
         this.setState({
@@ -40,16 +41,28 @@ class FormPost extends Component {
         let { content,fileImage } =  this.state;
         let fileImageArr = fileImage.split("\\");
         let result= '/images/' + fileImageArr[(fileImageArr.length-1)];
+        
+        // if(idFriend > 0) {
+        //     idFriend 
+        // }
+        
+        let url = window.location.href;
+        let xResult = url.split("/");
+        let idFriend = xResult[xResult.length-1];
+        console.log(idFriend);
+
+
+
         let contentPost = {
             content : content,
             urlImg : result,
-            target_user_id : 33
+            target_user_id : localStorage.getItem('idUserLogin')
         }
-        // console.log(contentPost);
         this.props.postReuslt(contentPost);
     }
 
     render() {
+        
         return (
             <Form onSubmit= {this.handleSubmit}>
             <label>

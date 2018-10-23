@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { deleteRequest } from '../actions/index';
-
+import {Link} from 'react-router-dom';
 class Friend extends Component {
     constructor(props){
         super(props);
@@ -13,26 +13,17 @@ class Friend extends Component {
     render() {
         let {friend,index} = this.props;
         let {friends} = this.props;
-        console.log(friends);
-        
         return(
             <tr>
                 <td>{index + 1}</td>
                 <td>{friend.full_name}</td>
                 <td>{friend.email}</td>
-                <td><button onClick={this.handleGo} type="submit" className="btn btn-success">Go</button></td>
+                <td><Link to={`/user/${friend.id}`} className="btn btn-success">Go</Link></td>
                 <td><button onClick={() => this.handleDelete(friend.id)} type="submit" className="btn btn-danger">Delete</button></td>
             </tr>
         );
     }
 }
-
-// const mapStateToProps = state => {
-//     //console.log(state);
-//     return {
-//         friends : state.user.listFriend
-//     }
-// }
 
 const mapDispatchToProps = (dispatch, props) => {
     return {

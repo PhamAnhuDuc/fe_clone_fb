@@ -1,7 +1,7 @@
 import * as types from './../constants/ActionType';
 
 let defaultState = {
-	isShow: false, //tk notifile có giá trị mặc định 
+	isShow: true, //tk notifile có giá trị mặc định 
 	style: 'info',
 	title: '',
 	content: ''

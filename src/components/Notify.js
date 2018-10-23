@@ -1,19 +1,26 @@
 import React, { Component } from 'react';
-import {AlertContainer, Alert} from "react-bs-notifier";
-//import {connect} from 'react-redux';
+import {ToastContainer, ToastStore} from 'react-toasts';
+import {connect} from 'react-redux';
 
 class Notify extends Component {
+    constructor(props){
+        super(props);
+    }
+    
     render() {
+        let message = this.props.message;
         // if(isShow === false) return null; //nếu = false thì ko cho nó hiển thị
         return (
             <div>
-                <AlertContainer position="top-right" >
-                    <Alert>
-                        {123}
-                    </Alert>
-                </AlertContainer>
+                {/* <button onClick={() => }>Click me !</button> */}
+                <ToastContainer store={ToastStore}/>
             </div>
         )
     }
 }
-export default Notify;
+const mapStateToProp = state => {
+    return {
+        message : state.user.messages
+    }
+} 
+export default connect (mapStateToProp, null) (Notify);

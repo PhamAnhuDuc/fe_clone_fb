@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import Friend from './../components/Friend';
 import { connect } from 'react-redux';
+import { getAllListFriend } from '../actions/index';
+
+
 class ListFriend extends Component {
     constructor(props){
         super(props);
@@ -8,7 +11,9 @@ class ListFriend extends Component {
     handleDelete = (id) => {
         this.props.onDelete(id);
     }
-
+    componentDidMount() {
+        this.props.fetchAllFriends();
+    }
     render() {
         let friends;
         if (this.props.resultDelete) {
@@ -16,8 +21,6 @@ class ListFriend extends Component {
         } else {
             friends = this.props.friends;
         }
-        console.log(friends);
-        
         return(
             <table className="table table-hover">
                 <thead>
@@ -49,11 +52,18 @@ class ListFriend extends Component {
 }
 
 const mapStateToProps = state => {
+	return {
+		friends : state.user.listFriend
+	}
+}
+const mapDispatchToProp = (dispatch, props) => {
     return {
-        resultDelete : state.user.listFriend
+        fetchAllFriends : () =>{
+            dispatch(getAllListFriend());
+        }
     }
 }
- export default connect (mapStateToProps,null)(ListFriend);
+ export default connect (mapStateToProps,mapDispatchToProp)(ListFriend);
 
 
 
