@@ -10,6 +10,12 @@ var findIndex = (friends, id) => {
     return result;
 }
 
+function deleteFriend(listFriend, index){
+    let tmp = listFriend.slice();
+    tmp.splice(index, 1);
+    return tmp;
+}
+
 let defaultState = {
     isLogin : '',
     resultSearch:[],
@@ -61,8 +67,6 @@ const user = (state = defaultState, action) => {
             }
 
         case types.ADD_FRIEND: 
-            //console.log(action.flag);
-            //console.log(action.id.flag);
             return {
                 ...state,
                 friendship : action.id.flag
@@ -80,11 +84,11 @@ const user = (state = defaultState, action) => {
         case types.DELETE_FRIEND:
             
             index = findIndex(state.listFriend,id);
-            state.listFriend = state.listFriend.filter((friend, i) => i !== index);
+            state.listFriend = deleteFriend(state.listFriend, index);
+            // state.listFriend = state.listFriend.filter((friend, i) => i !== index);
             return {
                 ...state,
             }
-        
         case types.GET_USER:
             state.getUser = action.user;
             return {...state}

@@ -10,7 +10,6 @@ class Item extends Component {
     }
     render() {
         let { item, index } = this.props;
-        //console.log(item);
         return(
             <tr>
                 <td>{index + 1}</td>

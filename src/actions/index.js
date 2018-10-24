@@ -56,8 +56,6 @@ export const actLogout = () => {
 
 //API POST Bài viết
 export const actPostRequest = (post) => {
-    //console.log(post);
-    
     return dispatch => {
         return callApi('post', 'POST', post, {'access-token': localStorage.getItem('access-token')}).then(res => {
             dispatch(actPost(res.data));
@@ -65,10 +63,12 @@ export const actPostRequest = (post) => {
     }
 }
 
-export const actPost = (post) => {
+export const actPost = (data) => {
+    // console.log(data);
+    
 	return {
         type : types.POST_CONTENT,
-        post,
+        data,
         
 	}
 }
@@ -90,6 +90,24 @@ export const actListFriend = (listFriend) => {
         listFriend
     }
 }
+
+//GET ALL POST
+
+export const getAllPostRequest = (id) => {
+    return dispatch => {
+        return callApi(`all-post/${id}`, 'GET', null, null).then(res => {
+            dispatch(actGetAllPost(res.data));     
+        })
+    }
+}
+
+export const actGetAllPost = (dataPost) => {
+    return {
+        type : types.SHOW_All_POST,
+        dataPost
+    }
+}
+
 
 //SEARCH REQUEST
 export const getSearchRequest = (search,sortBy) => {
@@ -155,4 +173,5 @@ export const actGetUser = (user) => {
         
 	}
 }
+
 

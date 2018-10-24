@@ -15,12 +15,7 @@ class ListFriend extends Component {
         this.props.fetchAllFriends();
     }
     render() {
-        let friends;
-        if (this.props.resultDelete) {
-            friends = this.props.resultDelete;
-        } else {
-            friends = this.props.friends;
-        }
+        let friends = this.props.friends;
         return(
             <table className="table table-hover">
                 <thead>
@@ -39,7 +34,7 @@ class ListFriend extends Component {
         );
     }
     showFriend = (friends) => {
-		let result = null;
+        let result = null;
 		if(friends.length > 0){
 			result = friends.map((friend, index ) => {
 				return (

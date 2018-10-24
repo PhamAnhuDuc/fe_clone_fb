@@ -44,3 +44,7 @@ textarea.form-control {
 .list-post-home {
 	display: inline-block !important;
 }
+
+.boder-post {
+	border: 1px solid #ccc;
+}
