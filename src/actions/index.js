@@ -56,6 +56,8 @@ export const actLogout = () => {
 
 //API POST Bài viết
 export const actPostRequest = (post) => {
+    //console.log(post);
+    
     return dispatch => {
         return callApi('post', 'POST', post, {'access-token': localStorage.getItem('access-token')}).then(res => {
             dispatch(actPost(res.data));

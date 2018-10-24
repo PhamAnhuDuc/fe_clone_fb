@@ -3,16 +3,12 @@ import { connect } from 'react-redux';
 import { deleteRequest } from '../actions/index';
 import {Link} from 'react-router-dom';
 class Friend extends Component {
-    constructor(props){
-        super(props);
-    }
     handleDelete = (id) => {
         this.props.onDelete(id);
     }
     
     render() {
         let {friend,index} = this.props;
-        let {friends} = this.props;
         return(
             <tr>
                 <td>{index + 1}</td>

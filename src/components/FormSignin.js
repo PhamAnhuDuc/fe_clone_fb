@@ -5,8 +5,6 @@ import Form from 'react-validation/build/form';
 import Input from 'react-validation/build/input';
 import CheckButton from 'react-validation/build/button';
 import { isEmail, isEmpty } from 'validator';
-import { actChangeNotify} from './../actions/index';
-import * as notify from './../constants/Notify';
 
 const required = (value) => {
 	if (isEmpty(value)) {
@@ -62,7 +60,7 @@ class FormSignin extends Component {
 				<div className="form-group">
 					<label htmlFor="inputEmail3" className="col-sm-2 control-label">Email</label>
 					<div className="col-sm-6">
-						<Input  validations={[required, minLength]} name="email" value={this.state.email} onChange={this.handleChange} type="text" className="form-control" id="inputEmail3" placeholder="Email" />
+						<Input  validations={[required, minLength, email]} name="email" value={this.state.email} onChange={this.handleChange} type="text" className="form-control" id="inputEmail3" placeholder="Email" />
 					</div>
 				</div>
 				<div className="form-group">

@@ -6,26 +6,23 @@ import { actGetUserRequest } from './../actions/index';
 
 
 class FriendPage extends Component {
-
-    componentDidMount(){
+    constructor(props){
+        super(props);
         this.props.getInfo(this.props.match.params.id);
     }
 
-    render() {
-        let data = this.props.data;
-
-
-        console.log(data);
+    render() { 
+        let {data} = this.props;
         return (
             <div className="media">
                 <div className="media-left">
                     <img src="/images/test1.jpg" className="media-object" style={{width: 160}} />
                     <div>Name : </div>  
-                    <h5>{data ? data.full_name : ''}</h5>
+                    <h5>{data ? data.user.full_name : ''}</h5>
                     <div>Email : </div>
-                    <h5>{data ? data.email : ''}</h5>
+                    <h5>{data ? data.user.email : ''}</h5>
                     <div>Phone : </div>
-                    <h5>{data ? data.phone : ''}</h5>
+                    <h5>{data ? data.user.phone : ''}</h5>
                 </div>
                 <div className="media-body">
                     <div className="page-header">
@@ -54,10 +51,8 @@ const mapDispathToProps = (dispatch , props) => {
     }
 }
 const mapStateToProps = (state) => {
-    console.log(state);
-    
     return {
-        data : state.user.getUser.user
+        data : state.user.getUser
     }
 }
 export default connect(mapStateToProps,mapDispathToProps)(FriendPage);

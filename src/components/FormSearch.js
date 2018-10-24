@@ -1,4 +1,4 @@
-import React, { Component ,Fragment } from 'react';
+import React, { Component} from 'react';
 import { connect } from 'react-redux';
 import { getSearchRequest } from './../actions/index';
 
@@ -22,9 +22,11 @@ class FormSearch extends Component {
         })
         
     }
+    
     handleSubmit = (event,sortBy) => {
         this.props.goSearch(this.state.strSearch, this.state.strSort);
     }
+    
     render() {
         let  strSort = this.state.strSort;
         return(
@@ -44,8 +46,8 @@ class FormSearch extends Component {
                             Search by <span className="caret" />
                         </button>
                         <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
-                            <li><a onClick={()=>this.handleSort('full_name')} role="button">Name</a></li>
-                            <li><a onClick={()=>this.handleSort('email')} role="button">Email</a></li>
+                            <li><a href="google.com" onClick={()=>this.handleSort('full_name')} role="button">Name</a></li>
+                            <li><a href="google.com" onClick={()=>this.handleSort('email')} role="button">Email</a></li>
                         </ul>
                         <span className="label label-success label-medium">{ strSort }</span>
                     </div>

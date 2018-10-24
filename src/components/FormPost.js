@@ -1,8 +1,20 @@
-import Form from 'react-validation/build/form';
 import React, { Component } from 'react';
 import { actPostRequest } from './../actions/index';
 import { connect } from 'react-redux';
+import Form from 'react-validation/build/form';
+import Input from 'react-validation/build/input';
+import CheckButton from 'react-validation/build/button';
+import {  isEmpty } from 'validator';
+
+const required = (value) => {
+    if (isEmpty(value)) {
+        return <small className="form-text text-danger">This field is required</small>;
+    }
+}
+
+
 class FormPost extends Component {
+    
     constructor(props) {
         super(props);
         this.state = {
@@ -29,9 +41,11 @@ class FormPost extends Component {
         });
         
         if (event.target.files && event.target.files[0]) {
+            // console.log(event.target.files);
             let reader = new FileReader();
             reader.onload = (e) => {
                 this.setState({image: e.target.result});
+            
             };
             reader.readAsDataURL(event.target.files[0]);
         }
@@ -39,40 +53,43 @@ class FormPost extends Component {
     handleSubmit(event) {
         event.preventDefault();
         let { content,fileImage } =  this.state;
-        let fileImageArr = fileImage.split("\\");
-        let result= '/images/' + fileImageArr[(fileImageArr.length-1)];
-        
-        // if(idFriend > 0) {
-        //     idFriend 
-        // }
+        // let fileImageArr = fileImage.split("\\");
+        // let result= '/images/' + fileImageArr[(fileImageArr.length-1)];
+        // let result= 
         
         let url = window.location.href;
         let xResult = url.split("/");
-        let idFriend = xResult[xResult.length-1];
-        console.log(idFriend);
-
-
-
+        let lengthURL = xResult.length;
+        let target_user_id;
+        
+        if (xResult[lengthURL - 1] === 'profile'){
+            target_user_id = localStorage.getItem('idUserLogin');
+        } else if(xResult[lengthURL - 2] === 'user') {
+            target_user_id = xResult[lengthURL - 1];
+        }
+        
         let contentPost = {
             content : content,
-            urlImg : result,
-            target_user_id : localStorage.getItem('idUserLogin')
+            fileImage : this.state.image,
+            target_user_id : +target_user_id
         }
-        this.props.postReuslt(contentPost);
+        this.form.validateAll();
+        if ( this.checkBtn.context._errors.length === 0 ) {
+			this.props.postReuslt(contentPost);
+        }
     }
-
     render() {
-        
         return (
-            <Form onSubmit= {this.handleSubmit}>
+            <Form onSubmit= {this.handleSubmit} ref={c => { this.form = c }} >
             <label>
                 Cảm nghĩ của bạn:
-                <input name ="content" value={this.state.value} onChange={this.handleChange} className="form-control" rows="5" />
+                <Input validations={[required]} name ="content" onChange={this.handleChange} value={this.state.value} className="form-control" rows="5" />
                 Select image:
                 <input type="file" onChange={this.handleChange} name ="fileImage" className="filetype" id="group_image"/>
                 <img id="target" src={this.state.image}/>
             </label>
             <button type="submit" className="btn btn-success post-form">POST</button>
+            <CheckButton style={{ display: 'none' }} ref={c => { this.checkBtn = c }} />
             </Form>
         );
     }

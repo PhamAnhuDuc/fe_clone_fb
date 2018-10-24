@@ -29,7 +29,6 @@ class ProfilePage extends Component {
 	}
 	
     render() {
-		let {friends} = this.props; 
 		let {match} = this.props,
 			main = '';
 		let x = window.location.href;
