@@ -1,13 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { addFriendRequest } from '../actions/index';
-
+import {Link} from 'react-router-dom';
 class Item extends Component {
-    handlerAdd = (id) => {
-        if(confirm("ban chac chan muon add ?")){ //eslint-disable-line
-            this.props.onAdd(id);
-        }
-    }
     render() {
         let { item, index } = this.props;
         return(
@@ -16,17 +9,11 @@ class Item extends Component {
                 <td>{item.full_name}</td>
                 <td>{item.email}</td>
                 <td> 
-                    <button type="button" className="btn btn-primary"  onClick={() => this.handlerAdd(item.id)} >Add</button>
+                    <Link to={`/user/${item.id}`} className="btn btn-success">Xem Trang Ca Nhan</Link>
                 </td>
             </tr> 
         );
     }
 }
-const mapDispactToProps = (dispatch, props) => {
-	return {
-		onAdd : (id) => {
-			dispatch(addFriendRequest(id));
-		}
-	}
-}
-export default connect ( null, mapDispactToProps)(Item);
+
+export default Item;

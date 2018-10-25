@@ -11,8 +11,6 @@ const required = (value) => {
         return <small className="form-text text-danger">This field is required</small>;
     }
 }
-
-
 class FormPost extends Component {
     
     constructor(props) {
@@ -50,19 +48,17 @@ class FormPost extends Component {
             reader.readAsDataURL(event.target.files[0]);
         }
     }
+    
     handleSubmit(event) {
         event.preventDefault();
-        let { content,fileImage } =  this.state;
-        // let fileImageArr = fileImage.split("\\");
-        // let result= '/images/' + fileImageArr[(fileImageArr.length-1)];
-        // let result= 
+        let { content } =  this.state; 
         
         let url = window.location.href;
         let xResult = url.split("/");
         let lengthURL = xResult.length;
         let target_user_id;
         
-        if (xResult[lengthURL - 1] === 'profile'){
+        if (xResult[lengthURL - 1] === 'profile' || (xResult[lengthURL - 1] === 'your-wall')){
             target_user_id = localStorage.getItem('idUserLogin');
         } else if(xResult[lengthURL - 2] === 'user') {
             target_user_id = xResult[lengthURL - 1];
@@ -75,6 +71,8 @@ class FormPost extends Component {
         }
         this.form.validateAll();
         if ( this.checkBtn.context._errors.length === 0 ) {
+            
+            
 			this.props.postReuslt(contentPost);
         }
     }
@@ -83,10 +81,14 @@ class FormPost extends Component {
             <Form onSubmit= {this.handleSubmit} ref={c => { this.form = c }} >
             <label>
                 Cảm nghĩ của bạn:
-                <Input validations={[required]} name ="content" onChange={this.handleChange} value={this.state.value} className="form-control" rows="5" />
+                <Input validations={[required]} name ="content" onChange={this.handleChange} value={this.state.value} className="form-control content-post" rows="5" />
                 Select image:
                 <input type="file" onChange={this.handleChange} name ="fileImage" className="filetype" id="group_image"/>
-                <img id="target" src={this.state.image}/>
+                {
+                    this.state.image ?
+                        <img id="target" src={this.state.image} alt="aaa"/>
+                    : ''
+                }
             </label>
             <button type="submit" className="btn btn-success post-form">POST</button>
             <CheckButton style={{ display: 'none' }} ref={c => { this.checkBtn = c }} />

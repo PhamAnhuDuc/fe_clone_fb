@@ -3,28 +3,25 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import FormPost from './FormPost';
 import ContentPost from './ContentPost';
-import { actLogout ,getAllPostRequest } from './../actions/index';
+import { actLogout ,getAllPostRequest, actGetUserRequest } from './../actions/index';
 
 class YourWall extends Component {
-
-    // constructor(props){
-    //     super(props);
-    //     this.props.getAllPost(33);
-    // }
     componentDidMount(){
-        this.props.getAllPost(33);
+        this.props.getAllPost(localStorage.getItem("idUserLogin"));
+        this.props.getInfo(localStorage.getItem("idUserLogin"));
     }
     handleLogOut = (e) => {
         this.props.LogOut();
     }
 
     render() {
-        
-        
+        let {data, isNewPost } = this.props;
         let isLogin = localStorage.getItem("isLogIn");
         if(isLogin !== 'true') {
             return <Redirect to='/signin'/>;
         }
+        let email = data ? data.user.email :'';
+        console.log(postDatas);
         let postDatas = this.props.postDatas;
         return(
             <div>
@@ -35,7 +32,7 @@ class YourWall extends Component {
                 <div className="panel panel-default">
                     <div className="panel-heading">Nội dung bài Post</div>
                     <div className="panel-body">
-                        {this.showPost(postDatas)}
+                        {this.showPost(postDatas,email, isNewPost)}
                     </div>
                 </div>
             </div>
@@ -44,14 +41,15 @@ class YourWall extends Component {
 
 
     }
-    showPost = (postDatas) => {
+    showPost = (postDatas, email , isNewPost) => {
+        
         let result = null;
         postDatas = postDatas ? this.props.postDatas : []; 
 
 		if(postDatas.length > 0){
 			result = postDatas.map((postData, index ) => {  
 				return (
-					<ContentPost postData = {postData} index = {index} key={index}/>
+					<ContentPost postData = {postData} index = {index} key={index} email = {email} isNewPost = {isNewPost} />
 				);
 			});
 		}
@@ -66,13 +64,18 @@ const mapDispatchToProps = (dispatch, props) => {
         },
         getAllPost : (id) => {
             dispatch(getAllPostRequest(id));
-        }
-        
+        },
+        getInfo : (id) => {
+            dispatch(actGetUserRequest(id));
+        },
     }
 }
 const mapStateToProps = state => {
+    // console.log(state.user);
+    
     return {
-        isLogin2 : state.user.isLogin,
+        data : state.user.getUser,
+        isNewPost : state.post.isNewPost,
         postDatas  : state.post.allPost.post,
     }
 }

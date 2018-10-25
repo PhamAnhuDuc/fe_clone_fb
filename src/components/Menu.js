@@ -22,7 +22,7 @@ const MenuLink = ({ menu }) => {
 
 class Menu extends Component {
 	componentWillMount(){
-		//this.createMenu();
+		this.createMenu();
 	}
 
 	render() {
@@ -31,18 +31,15 @@ class Menu extends Component {
 		);
 	}
 	createMenu(){
-		//let {user} = this.props;
 		let menus  = [];
-		//if(user.isLogin === true) { //login
-			// menus.push({to: '/task', exact: true, name: 'Task'});
-			// menus.push({to: '/user', exact: true, name: 'User'});
+		if(localStorage.getItem('isLogIn') === 'true') { //login
 			menus.push({to: '/home', exact: true, name: 'Home'});
 			menus.push({to: '/profile', exact: false, name: 'Profile'});
-		//}else{
+		}else{
 			menus.push({to: '/signin', exact: true, name: 'Signin'});
 			menus.push({to: '/signup', exact: true, name: 'Signup'});
 			menus.push({to: '/search', exact: true, name: 'Search'});
-		//}
+		}
 		return menus;
 	}
 	showMenus(){
@@ -59,10 +56,3 @@ class Menu extends Component {
     }
 }
 export default Menu;
-// const mapStateToProps = state => {
-//     return {
-//         user: state.user
-//     }
-// }
-
-// export default connect(mapStateToProps, null, null, {pure:false})(Menu);

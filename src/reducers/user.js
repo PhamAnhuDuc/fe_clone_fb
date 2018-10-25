@@ -22,7 +22,9 @@ let defaultState = {
     friendship: '',
     listFriend: '',
     messages: '',
-    getUser:'' ,
+    getUser: '' ,
+    isFriend : false
+
 }
 
 const user = (state = defaultState, action) => {
@@ -45,6 +47,7 @@ const user = (state = defaultState, action) => {
                 localStorage.setItem("isLogIn", 'true');
                 localStorage.setItem("access-token", action.payload.user.access_token);
                 localStorage.setItem("idUserLogin", action.payload.user.id);
+                localStorage.setItem("emailLogin", action.payload.user.email);
             }
             return  {
                 ...state,
@@ -54,6 +57,7 @@ const user = (state = defaultState, action) => {
             localStorage.removeItem("access-token");
             localStorage.removeItem("isLogIn");
             localStorage.removeItem("idUserLogin");
+            localStorage.removeItem("emailLogin");
             state.isLogin = false;
             return {
                 ...state,
@@ -67,14 +71,13 @@ const user = (state = defaultState, action) => {
             }
 
         case types.ADD_FRIEND: 
+            state.isFriend = true;
             return {
                 ...state,
                 friendship : action.id.flag
             }
         case types.SHOW_LIST_FRIEND: 
-            //console.log(action.listFriend.friends);
             state = action.listFriend.friends;
-            
             
             return {
                 ...state,
@@ -91,6 +94,7 @@ const user = (state = defaultState, action) => {
             }
         case types.GET_USER:
             state.getUser = action.user;
+            state.isFriend = action.user.flag ? true : false;
             return {...state}
         default:
             return state;

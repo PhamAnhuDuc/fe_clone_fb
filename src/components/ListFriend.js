@@ -5,9 +5,6 @@ import { getAllListFriend } from '../actions/index';
 
 
 class ListFriend extends Component {
-    constructor(props){
-        super(props);
-    }
     handleDelete = (id) => {
         this.props.onDelete(id);
     }

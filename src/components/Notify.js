@@ -1,19 +1,16 @@
 import React, { Component } from 'react';
-import {ToastContainer, ToastStore} from 'react-toasts';
+//import {ToastContainer, ToastStore} from 'react-toasts';
 import {connect} from 'react-redux';
 
 class Notify extends Component {
-    constructor(props){
-        super(props);
-    }
     
     render() {
-        let message = this.props.message;
+        // let message = this.props.message;
         // if(isShow === false) return null; //nếu = false thì ko cho nó hiển thị
         return (
             <div>
                 {/* <button onClick={() => }>Click me !</button> */}
-                <ToastContainer store={ToastStore}/>
+                {/* <ToastContainer store={ToastStore}/> */}
             </div>
         )
     }

@@ -11,7 +11,7 @@ td span.label {
 }
 
 .panel-body img {
-	/* width: 100%; */
+	
 }
 
 li.list-group-item {
@@ -36,8 +36,8 @@ li.list-group-item span.author{
 
 .post-form {
 	display: block !important;
+	margin-bottom: 10px !important;
 }
-
 textarea.form-control {
     width: 500px;
 }
@@ -47,4 +47,17 @@ textarea.form-control {
 
 .boder-post {
 	border: 1px solid #ccc;
+}
+
+.title-email {
+	color: #2E64FE;
+}
+
+#target {
+	width : 300px;
+	height: 200px;
+}
+
+.content-post {
+	height: 80px !important;
 }
