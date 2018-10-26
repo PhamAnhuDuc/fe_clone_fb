@@ -1,23 +1,15 @@
 import * as types from './../constants/ActionType';
 import callApi from './../utils/index';
 
-// export const actChangeNotify = (style, title, content) => {
-// 	return {
-// 		type : types.CHANGE_NOTIFY,
-// 		style, title, content
-// 	}
-// }
-// export const actHideNotify = () => {
-// 	return {
-// 		type : types.HIDE_NOTIFY,
-// 	}
-// }
 //API - all 
 export const actRegisterRequest = (userRegister) => {
-    return async dispatch => {
-        return await callApi('user/register', 'POST', userRegister).then(res => {
-            dispatch(actRegister(res.data));
-            //console.log(res);
+    return dispatch => {
+        return callApi('user/register', 'POST', userRegister).then(res => {
+            res = res ? res.data : '';
+            if (res.user) {
+                alert('Đăng ký thành công');
+            }   
+            dispatch(actRegister(res));
         })
     }
 }
@@ -25,69 +17,76 @@ export const actRegisterRequest = (userRegister) => {
 export const actRegister = (userRegister) => {
     return {
         type : types.USER_REGISTER,
-        payload: userRegister
+        userRegister,
     }
 }
 
 //API 
 export const actLoginRequest = (userLogin) => {
-    return async dispatch => {
-        return await callApi('user/login', 'POST', userLogin).then(res => {
-            dispatch(actLogin(res.data));
+    return dispatch => {
+        return callApi('user/login', 'POST', userLogin).then(res => {
+            let userLogin = '';
+            if (res && res.data) {
+                userLogin = res.data.user;
+            }
+            if (!userLogin.id) {
+                alert(res.data.message);
+            }
+            dispatch(actLogin(userLogin));
         })
     }
 }
 //hành động đăng kí và truyền vào thông tin để đăng kí
 export const actLogin = (userLogin) => {
-    
     return {
         type : types.USER_LOGIN,
-        payload: userLogin
+        userLogin,
     }
 }
 
+// LOGOUT
 export const actLogout = () => {
 	return {
 		type : types.USER_LOGOUT
 	}
 }
 
-
-
 //API POST Bài viết
 export const actPostRequest =  (post) => {
+    console.log(post);
+    
     return dispatch => {
         return callApi('post', 'POST', post, {'access-token': localStorage.getItem('access-token')}).then(res => {
-            if(res === undefined) {
-                res = {};
-            }
-             dispatch(actPost(res.data));
+            res = res ? res.data : '';
+            dispatch(actPost(res));
         })
     }
 }
 
-export const actPost = (data) => {
+export const actPost = (post) => {
 	return {
         type : types.POST_CONTENT,
-        data,
+        post,
 	}
 }
 
 // api GET LITS FIEND
 
 export const getAllListFriend = () => {
-    return  async dispatch => {
-        return await callApi('list-friend', 'GET', null, {'access-token': localStorage.getItem('access-token')}).then(res => {
-            dispatch(actListFriend(res.data));
+    return dispatch => {
+        return callApi('list-friend', 'GET', null, {'access-token': localStorage.getItem('access-token')}).then(res => {
+            if (res && res.data) {
+                res = res.data.listFriend;
+            }
+            dispatch(actListFriend(res));
         })
     }
 }
 
 export const actListFriend = (listFriend) => {
-    // console.log(listFriend);
     return {
         type : types.SHOW_LIST_FRIEND,
-        listFriend
+        listFriend,
     }
 }
 
@@ -96,7 +95,8 @@ export const actListFriend = (listFriend) => {
 export const getAllPostRequest = (id) => {
     return async dispatch => {
         return await callApi(`all-post/${id}`, 'GET', null, null).then(res => {
-            dispatch(actGetAllPost(res.data));     
+            res = res ? res.data : '';
+            dispatch(actGetAllPost(res));     
         })
     }
 }
@@ -112,9 +112,10 @@ export const actGetAllPost = (dataPost) => {
 //SEARCH REQUEST
 export const getSearchRequest = (search,sortBy) => {
     let name = sortBy;
-    return async dispatch => {
-        return await callApi(`user/search?${name}=${search}`, 'GET', null).then(res => {
-            dispatch(actSearch(res.data));
+    return dispatch => {
+        return callApi(`user/search?${name}=${search}`, 'GET', null).then(res => {
+            res = res ? res.data : '';
+            dispatch(actSearch(res));
         })
     }
 }
@@ -122,15 +123,17 @@ export const getSearchRequest = (search,sortBy) => {
 export const actSearch = (search) => {
     return {
         type : types.SEARCH,
-        search
+        search,
     }
 }
 
 //ADD FRIEND REQUEST
 export const addFriendRequest = (id) => {
-    return async dispatch => {
-        return await callApi(`user/add-friend/${id}`, 'GET', null, {'access-token': localStorage.getItem('access-token')}).then(res => {
-            dispatch(actAddFriend(res.data));
+    return dispatch => {
+        return callApi(`user/add-friend/${id}`, 'GET', null, {'access-token': localStorage.getItem('access-token')}).then(res => {
+            res = res ? res.data : '';
+            dispatch(actAddFriend(res));
+            alert(res.message);
         })
     }
 }

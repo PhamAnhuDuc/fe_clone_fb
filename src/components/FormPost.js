@@ -69,6 +69,7 @@ class FormPost extends Component {
             fileImage : this.state.image,
             target_user_id : +target_user_id
         }
+        
         this.form.validateAll();
         if ( this.checkBtn.context._errors.length === 0 ) {
             

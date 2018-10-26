@@ -10,12 +10,14 @@ class ContentPost extends Component {
     }
 
     handlerReply = (id) => {
-        var x = document.getElementById("myDIV"+id);
-        if (x.style.display === "block") {
-            x.style.display = "none";
-        } else {
-            x.style.display = "block";
-        }
+        //console.log(id);
+        <Redirect to = ''/>
+        // var x = document.getElementById("myDIV"+id);
+        // if (x.style.display === "block") {
+        //     x.style.display = "none";
+        // } else {
+        //     x.style.display = "block";
+        // }
     }
     handleChange(event) {
         this.setState({value: event.target.value});
@@ -28,9 +30,10 @@ class ContentPost extends Component {
 
     render() {
         let {postData , isNewPost ,index, email } = this.props;
-        console.log(isNewPost);
+        console.log(postData);
         
         postData = postData ? postData : ''; 
+
         return(
             <div className="boder-post">
                 {         
@@ -57,13 +60,16 @@ class ContentPost extends Component {
                     </div>
                     <div className="media-body">
                         <h4 className="media-heading">{postData.content}</h4>
-                        <h5 style={{color: 'red', cursor: 'pointer'}} onClick={ () => this.handlerReply(postData.id) } >Bình Luận</h5>
+                        {/* <h5 style={{color: 'red', cursor: 'pointer'}} onClick={ () => this.handlerReply(postData.id) } >Bình Luận</h5> */}
+                        
                         <div id={`myDIV${index}`} style={{display: 'none'}} >
                             <form onSubmit={this.handleSubmit}>
                                 <input type="text" value={this.state.value} onChange={this.handleChange} />
                                 <input type="submit" value="Submit" />
                             </form>
+                            {/* <ItemComment/>
                             <ItemComment/>
+                            <ItemComment/> */}
                         </div>
                     </div>
                 </div>

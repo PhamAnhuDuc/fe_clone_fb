@@ -3,6 +3,8 @@ import {Link} from 'react-router-dom';
 class Item extends Component {
     render() {
         let { item, index } = this.props;
+        
+        
         return(
             <tr>
                 <td>{index + 1}</td>

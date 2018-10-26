@@ -8,6 +8,7 @@ import HomePage from './pages/HomePage';
 import Account from './components/Account';
 import SearchPage from './pages/SearchPage';
 import FriendPage from './pages/FriendPage';
+import PostDetails from './pages/PostDetails';
 
 const router = [
     {
@@ -47,11 +48,14 @@ const router = [
         main : (match , history) => <FriendPage {...match} />
     },
     {
+        path: '/post/:id',
+        exact : false,
+        main : (match , history) => <PostDetails {...match}   {...history}/>
+    },
+    {
         path: '',
         exact: true,
         main: () => <NotfoundPage />
     },
-
-
 ];
 export default router;

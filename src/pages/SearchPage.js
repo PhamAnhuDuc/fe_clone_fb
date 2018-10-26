@@ -8,10 +8,7 @@ import { addFriendRequest } from '../actions/index';
 class SearchPage extends Component {
 
     render() {
-		let items = [];
-		if(this.props.items) {
-			items = this.props.items;
-		}
+		let items = this.props.items
         return(
             <div className="panel panel-info">
 				<div className="panel-heading">

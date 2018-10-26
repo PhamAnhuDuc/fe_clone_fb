@@ -18,6 +18,7 @@ class FriendPage extends Component {
     render() { 
         let {data, isNewPost } = this.props;
         let checkRelationShip = this.props.isFriend;
+        
         data = data ? data : '';
         if(data.user === null) {
             return  <Redirect to="/profile" />;
@@ -38,7 +39,7 @@ class FriendPage extends Component {
                     <div className="page-header">
                         {
                             localStorage.getItem('isLogIn') ?
-                                checkRelationShip === undefined ?
+                                checkRelationShip === '' ?
                                     ''
                                 :   checkRelationShip === true ?
                                         <FormPost />
@@ -86,10 +87,9 @@ const mapDispathToProps = (dispatch , props) => {
     }
 }
 const mapStateToProps = (state) => {
-    console.log(state.user);
     return {
         data : state.user.getUser,
-        postDatas  : state.post.allPost.post,
+        postDatas  : state.post.allPost,
         isNewPost : state.post.isNewPost,
         isFriend : state.user.isFriend,
     }

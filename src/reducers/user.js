@@ -18,13 +18,12 @@ function deleteFriend(listFriend, index){
 
 let defaultState = {
     isLogin : '',
-    resultSearch:[],
+    resultSearch: [],
     friendship: '',
     listFriend: '',
     messages: '',
     getUser: '' ,
-    isFriend : false
-
+    isFriend : '',
 }
 
 const user = (state = defaultState, action) => {
@@ -32,26 +31,26 @@ const user = (state = defaultState, action) => {
     var { id } = action;
     switch (action.type) {
         case types.USER_REGISTER :
-            if (action.payload.error) {
-                var messages = action.payload.detail;
+            if (action.userRegister.error) {
+                var messages = action.userRegister.detail;
             }
+            state.messages = messages;
             return {
                 ...state,
-                user_login: action.payload,
-                messages : messages
+                // user_login: action.userRegister,
             }
+
         case types.USER_LOGIN:
-            state = action.payload.message;
-            //console.log(action.payload.message);
-            if(action.payload.user.id){
+            if(action.userLogin.id){
+                state.isLogin = true;
                 localStorage.setItem("isLogIn", 'true');
-                localStorage.setItem("access-token", action.payload.user.access_token);
-                localStorage.setItem("idUserLogin", action.payload.user.id);
-                localStorage.setItem("emailLogin", action.payload.user.email);
+                localStorage.setItem("access-token", action.userLogin.access_token);
+                localStorage.setItem("idUserLogin", action.userLogin.id);
+                localStorage.setItem("emailLogin", action.userLogin.email);
+                state.resultSearch = [];
             }
             return  {
                 ...state,
-                messages : action.payload.message
             }
         case types.USER_LOGOUT: 
             localStorage.removeItem("access-token");
@@ -59,16 +58,14 @@ const user = (state = defaultState, action) => {
             localStorage.removeItem("idUserLogin");
             localStorage.removeItem("emailLogin");
             state.isLogin = false;
+            state.resultSearch = [];
             return {
                 ...state,
             }
 
         case types.SEARCH: 
-            return {
-                ...state,
-                resultSearch : action.search.users
-               
-            }
+            state.resultSearch = action.search;
+            return {...state}
 
         case types.ADD_FRIEND: 
             state.isFriend = true;
@@ -76,13 +73,10 @@ const user = (state = defaultState, action) => {
                 ...state,
                 friendship : action.id.flag
             }
-        case types.SHOW_LIST_FRIEND: 
-            state = action.listFriend.friends;
-            
+        case types.SHOW_LIST_FRIEND:  
+            state.listFriend = action.listFriend;
             return {
-                ...state,
-                listFriend: action.listFriend.friends
-               
+                ...state
             }    
         case types.DELETE_FRIEND:
             

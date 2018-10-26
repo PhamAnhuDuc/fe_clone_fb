@@ -11,6 +11,8 @@ class YourWall extends Component {
         this.props.getInfo(localStorage.getItem("idUserLogin"));
     }
     handleLogOut = (e) => {
+        //console.log('aaaa');
+        
         this.props.LogOut();
     }
 
@@ -20,8 +22,8 @@ class YourWall extends Component {
         if(isLogin !== 'true') {
             return <Redirect to='/signin'/>;
         }
-        let email = data ? data.user.email :'';
-        console.log(postDatas);
+        let email = data.user ? data.user.email :'';
+        //console.log(postDatas);
         let postDatas = this.props.postDatas;
         return(
             <div>
@@ -36,10 +38,7 @@ class YourWall extends Component {
                     </div>
                 </div>
             </div>
-            
         );
-
-
     }
     showPost = (postDatas, email , isNewPost) => {
         
@@ -71,12 +70,11 @@ const mapDispatchToProps = (dispatch, props) => {
     }
 }
 const mapStateToProps = state => {
-    // console.log(state.user);
-    
     return {
         data : state.user.getUser,
         isNewPost : state.post.isNewPost,
-        postDatas  : state.post.allPost.post,
+        postDatas  : state.post.allPost,
+        isLogin: state.user.isLogin,
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(YourWall);

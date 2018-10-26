@@ -38,6 +38,7 @@ class FormSignup extends Component {
 			phone : phone,
 			address : address
 		}
+		
 		this.form.validateAll();
 		if ( this.checkBtn.context._errors.length === 0 ) {
 			this.props.onAddUserRegister(userRegister);

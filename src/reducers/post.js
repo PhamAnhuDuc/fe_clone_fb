@@ -14,16 +14,15 @@ function insertPost(listPost, post){
 const post = (state = defaultState, action) => {
 	switch(action.type){
 		case types.POST_CONTENT:
-		//console.log(action.data);
 			state.isNewPost = true;
-			action.data = action.data ? action.data : '';
-			state.post = action.data.post;
-			state.allPost.post = insertPost(state.allPost.post, state.post);
+			action = action.post ? action.post : '';
+			state.allPost = insertPost(state.allPost, action.post);
 			return {...state};
+
 		case types.SHOW_All_POST:
 			state.allPost = action.dataPost
+			return {...state};
 
-		return {...state};
 		default:
 			return state;
 	}

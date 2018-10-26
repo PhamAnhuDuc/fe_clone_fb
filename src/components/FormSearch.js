@@ -46,8 +46,8 @@ class FormSearch extends Component {
                             Search by <span className="caret" />
                         </button>
                         <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
-                            <li><a href="google.com" onClick={()=>this.handleSort('full_name')} role="button">Name</a></li>
-                            <li><a href="google.com" onClick={()=>this.handleSort('email')} role="button">Email</a></li>
+                            <li><a href="#" onClick={()=>this.handleSort('full_name')} role="button">Name</a></li>
+                            <li><a href="#" onClick={()=>this.handleSort('email')} role="button">Email</a></li>
                         </ul>
                         <span className="label label-success label-medium">{ strSort }</span>
                     </div>

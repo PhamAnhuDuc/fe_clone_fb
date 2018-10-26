@@ -21,31 +21,33 @@ const MenuLink = ({ menu }) => {
 }
 
 class Menu extends Component {
-	// componentWillMount(){
-	// 	this.createMenu();
-	// }
+	componentWillMount(){
+		//this.createMenu();
+	}
 
 	render() {
 		return (
 			<div className="list-group">{this.showMenus()}</div>
 		);
 	}
-	//createMenu(){
+	createMenu(){
+		//let {user} = this.props;
 		let menus  = [];
-		// if(localStorage.getItem('isLogIn') === 'true') { //login
+		//if(user.isLogin === true) { //login
+			// menus.push({to: '/task', exact: true, name: 'Task'});
+			// menus.push({to: '/user', exact: true, name: 'User'});
 			menus.push({to: '/home', exact: true, name: 'Home'});
 			menus.push({to: '/profile', exact: false, name: 'Profile'});
-			menus.push({to: '/search', exact: true, name: 'Search'});
-		// }else{
+		//}else{
 			menus.push({to: '/signin', exact: true, name: 'Signin'});
 			menus.push({to: '/signup', exact: true, name: 'Signup'});
-			//menus.push({to: '/search', exact: true, name: 'Search'});
-		// }
-	 	//return menus;
-	//}
-	showMenus(menus){
+			menus.push({to: '/search', exact: true, name: 'Search'});
+		//}
+		return menus;
+	}
+	showMenus(){
 		let xhtml = null;
-		//let menus  = this.createMenu();
+		let menus  = this.createMenu();
 		if(menus.length > 0 ){
 			xhtml = menus.map((menu, index)=> {
 				return (
@@ -57,3 +59,10 @@ class Menu extends Component {
     }
 }
 export default Menu;
+// const mapStateToProps = state => {
+//     return {
+//         user: state.user
+//     }
+// }
+
+// export default connect(mapStateToProps, null, null, {pure:false})(Menu);
