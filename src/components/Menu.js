@@ -21,30 +21,31 @@ const MenuLink = ({ menu }) => {
 }
 
 class Menu extends Component {
-	componentWillMount(){
-		this.createMenu();
-	}
+	// componentWillMount(){
+	// 	this.createMenu();
+	// }
 
 	render() {
 		return (
 			<div className="list-group">{this.showMenus()}</div>
 		);
 	}
-	createMenu(){
+	//createMenu(){
 		let menus  = [];
-		if(localStorage.getItem('isLogIn') === 'true') { //login
+		// if(localStorage.getItem('isLogIn') === 'true') { //login
 			menus.push({to: '/home', exact: true, name: 'Home'});
 			menus.push({to: '/profile', exact: false, name: 'Profile'});
-		}else{
+			menus.push({to: '/search', exact: true, name: 'Search'});
+		// }else{
 			menus.push({to: '/signin', exact: true, name: 'Signin'});
 			menus.push({to: '/signup', exact: true, name: 'Signup'});
-			menus.push({to: '/search', exact: true, name: 'Search'});
-		}
-		return menus;
-	}
-	showMenus(){
+			//menus.push({to: '/search', exact: true, name: 'Search'});
+		// }
+	 	//return menus;
+	//}
+	showMenus(menus){
 		let xhtml = null;
-		let menus  = this.createMenu();
+		//let menus  = this.createMenu();
 		if(menus.length > 0 ){
 			xhtml = menus.map((menu, index)=> {
 				return (
