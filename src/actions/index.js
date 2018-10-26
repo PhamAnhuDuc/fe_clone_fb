@@ -6,8 +6,8 @@ export const actRegisterRequest = (userRegister) => {
     return dispatch => {
         return callApi('user/register', 'POST', userRegister).then(res => {
             res = res ? res.data : '';
-            if (res.user) {
-                alert('Đăng ký thành công');
+            if (res.id) {
+                alert('Register success. Please active email....!');
             }   
             dispatch(actRegister(res));
         })
@@ -25,6 +25,7 @@ export const actRegister = (userRegister) => {
 export const actLoginRequest = (userLogin) => {
     return dispatch => {
         return callApi('user/login', 'POST', userLogin).then(res => {
+            
             let userLogin = '';
             if (res && res.data) {
                 userLogin = res.data.user;
@@ -176,6 +177,42 @@ export const actGetUser = (user) => {
 	}
 }
 
+//GET INOF POST
+export const getInfoPostRequest = (id) => {
+    return dispatch => {
+        return  callApi(`post/${id}`, 'GET', null, null).then(res => {
+            res = res ? res.data : '';
+            dispatch(actGetInfoPost(res));
+        })
+    }
+}
+export const actGetInfoPost = (getPost) => {
+	return {
+        type : types.GET_INFO_POST,
+        getPost,
+	}
+}
+
+//API Send Commetn 
+
+
+export const sendCommetnRequest = (comment) => {
+    return dispatch => {
+        return  callApi('post/comment', 'POST', comment, {'access-token': localStorage.getItem('access-token')}).then(res => {
+            let comment = '';
+            if (res && res.data) {
+                comment = res.data.comment;
+            }
+            dispatch(actSendComment(comment));
+        })
+    }
+}
+export const actSendComment = (comment) => {
+	return {
+        type : types.SEND_COMMENT,
+        comment,
+	}
+}
 
 
 //API Comment POST

@@ -64,3 +64,9 @@ textarea.form-control {
 .mr-top-10 {
 	border-top: 1px solid rebeccapurple;
 }
+.card-img-top  {
+	width: 300px;
+}
+.width-400 {
+	width: 400px;
+}

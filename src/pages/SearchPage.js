@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import { addFriendRequest } from '../actions/index';
 
 class SearchPage extends Component {
-
     render() {
 		let items = this.props.items
         return(

@@ -8,7 +8,7 @@ import HomePage from './pages/HomePage';
 import Account from './components/Account';
 import SearchPage from './pages/SearchPage';
 import FriendPage from './pages/FriendPage';
-import PostDetails from './pages/PostDetails';
+import PostDetails from './components/PostDetail';
 
 const router = [
     {

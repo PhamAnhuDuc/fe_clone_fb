@@ -1,37 +1,9 @@
 import React, { Component } from 'react';
-import ItemComment from './../components/ItemComment';
+import {Link} from 'react-router-dom';
 class ContentPost extends Component {
-    
-    constructor(props) {
-        super(props);
-        this.state = {value: ''};
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
-
-    handlerReply = (id) => {
-        //console.log(id);
-        <Redirect to = ''/>
-        // var x = document.getElementById("myDIV"+id);
-        // if (x.style.display === "block") {
-        //     x.style.display = "none";
-        // } else {
-        //     x.style.display = "block";
-        // }
-    }
-    handleChange(event) {
-        this.setState({value: event.target.value});
-    }
-    
-    handleSubmit(event) {
-        alert('A name was submitted: ' + this.state.value);
-        event.preventDefault();
-    }
 
     render() {
         let {postData , isNewPost ,index, email } = this.props;
-        console.log(postData);
-        
         postData = postData ? postData : ''; 
 
         return(
@@ -60,17 +32,7 @@ class ContentPost extends Component {
                     </div>
                     <div className="media-body">
                         <h4 className="media-heading">{postData.content}</h4>
-                        {/* <h5 style={{color: 'red', cursor: 'pointer'}} onClick={ () => this.handlerReply(postData.id) } >Bình Luận</h5> */}
-                        
-                        <div id={`myDIV${index}`} style={{display: 'none'}} >
-                            <form onSubmit={this.handleSubmit}>
-                                <input type="text" value={this.state.value} onChange={this.handleChange} />
-                                <input type="submit" value="Submit" />
-                            </form>
-                            {/* <ItemComment/>
-                            <ItemComment/>
-                            <ItemComment/> */}
-                        </div>
+                        <Link to={`/post/${postData.id}`} style={{color: 'red', cursor: 'pointer'}} >Detail Post</Link>
                     </div>
                 </div>
             </div>
