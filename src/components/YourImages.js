@@ -1,54 +1,62 @@
 import React, { Component } from 'react';
-import { post } from 'axios';
+import { connect} from 'react-redux';
+import { actChangeImageRequest } from './../actions/index';
 class YourImages extends Component {
     constructor(props) {
         super(props);
-        this.state ={
-          file:null
+        this.state = {
+            fileImage:'',
+        };
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        
+    }
+    handleChange = (event) => {
+		const target = event.target;    // input selectbox
+		const value = target.type === 'checkbox' ? target.checked : target.value;
+		const name = target.name;
+		this.setState({
+			[name]: value
+        });
+        
+        if (event.target.files && event.target.files[0]) {
+            let reader = new FileReader();
+            reader.onload = (e) => {
+                this.setState({image: e.target.result});
+            };
+            reader.readAsDataURL(event.target.files[0]);
         }
-        this.onFormSubmit = this.onFormSubmit.bind(this)
-        this.onChange = this.onChange.bind(this)
-        this.fileUpload = this.fileUpload.bind(this)
-      }
-      onFormSubmit(e){
-        e.preventDefault() // Stop form submit
-        this.fileUpload(this.state.file).then((response)=>{
-          console.log(response.data);
-        })
-      }
-      onChange(e) {
-        this.setState({file:e.target.files[0]})
-      }
-      fileUpload(file){
-        const url = 'http://example.com/file-upload';
-        const formData = new FormData();
-        formData.append('file',file)
-        const config = {
-            headers: {
-                'content-type': 'multipart/form-data'
-            }
+    }
+    
+    handleSubmit(event) {
+        event.preventDefault();
+        let data = {
+            fileImage : this.state.image
         }
-        return  post(url, formData,config);
-      }
+        this.props.changImage(data);
+    }
     render() {
+        
         return(
-            <form name="userForm" onSubmit={this.onFormSubmit} >
+            <form name="userForm" onSubmit={this.handleSubmit} >
                 <div className="panel panel-default">
                     <div className="panel-heading text-center">
-                        <h3 className="panel-title">Ảnh đại diện</h3>
-                        <p>Thay đổi ảnh đại diện của bạn ở đây</p>
+                        <h3 className="panel-title">Avatar</h3>
+                        <p>Change avatar</p>
                     </div>
                     <div className="panel-body">
                         <div className="text-center">
-                            <img alt="profile-image" src="/images/739_DucPA.jpg" id="blaha" aria-hidden="true" role="presentation"  />
-                            <div className="cropper-buttons clearfix">
-                                <input onChange={this.onChange} accept="image/*" type="file" id="imgInp" className="my_file" name="avatar" required={true} />
-                            </div>
+                        <input type="file" onChange={this.handleChange} name ="fileImage" className="filetype" id="group_image"/>
+                        {
+                            this.state.image ?
+                                <img id="target" src={this.state.image} alt="aaa"/>
+                            : ''
+                        }
                         </div>
                     </div>
                     <div className="panel-footer text-center">
                         <button className="btn btn-primary" type="submit">
-                        Lưu ảnh đại diện
+                            Save
                         </button>
                     </div>
                 </div>
@@ -56,7 +64,14 @@ class YourImages extends Component {
         );
     }
 }
-export default YourImages;
+const mapDispatchToProps = (dispatch, props) => {
+    return {
+        changImage : (avatar) => {
+            dispatch(actChangeImageRequest(avatar));
+        }
+    }
+} 
+export default connect (null,mapDispatchToProps)(YourImages);
 
 
                        

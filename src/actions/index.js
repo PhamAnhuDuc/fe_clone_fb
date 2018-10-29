@@ -214,19 +214,25 @@ export const actSendComment = (comment) => {
 	}
 }
 
+//Change Images
+export const actChangeImageRequest = (img) => {
+    return dispatch => {
+        return  callApi('user/change-avatar', 'POST', img, {'access-token': localStorage.getItem('access-token')}).then(res => {
+            let img = '';
+            if (res && res.data) {
+                img = res.data;
+            }
+            dispatch(actChangeImage(img));
+            if(img.flag === false){
+                alert(img.message);
+            }
+        })
+    }
+}
+export const actChangeImage = (img) => {
+	return {
+        type : types.CHANGE_IMAGE,
+        img,
+	}
+}
 
-//API Comment POST
-// export const actCommentPostRequest =  (post) => {
-//     return dispatch => {
-//         return callApi('post/comment', 'POST', post, {'access-token': localStorage.getItem('access-token')}).then(res => {
-//              dispatch(actCommentPost(res.data));
-//         })
-//     }
-// }
-
-// export const actCommentPost = (data) => {
-// 	return {
-//         type : types.POST_ARTICLE_CONTENT,
-//         data,
-// 	}
-// }

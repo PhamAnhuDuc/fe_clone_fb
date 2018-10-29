@@ -9,7 +9,7 @@ class Item extends Component {
                 <td>{item.full_name}</td>
                 <td>{item.email}</td>
                 <td> 
-                    <Link to={`/user/${item.id}`} className="btn btn-success">Xem Trang Ca Nhan</Link>
+                    <Link to={`/user/${item.id}`} className="btn btn-success">View Page</Link>
                 </td>
             </tr> 
         );

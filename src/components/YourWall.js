@@ -11,8 +11,6 @@ class YourWall extends Component {
         this.props.getInfo(localStorage.getItem("idUserLogin"));
     }
     handleLogOut = (e) => {
-        //console.log('aaaa');
-        
         this.props.LogOut();
     }
 
@@ -32,7 +30,7 @@ class YourWall extends Component {
                 <button onClick={this.handleLogOut} type="submit" className="btn btn-danger">LOGOUT</button>
                 </div>
                 <div className="panel panel-default">
-                    <div className="panel-heading">Nội dung bài Post</div>
+                    <div className="panel-heading">Content Post</div>
                     <div className="panel-body">
                         {this.showPost(postDatas,email, isNewPost)}
                     </div>

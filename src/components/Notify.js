@@ -5,8 +5,6 @@ import {connect} from 'react-redux';
 class Notify extends Component {
     
     render() {
-        // let message = this.props.message;
-        // if(isShow === false) return null; //nếu = false thì ko cho nó hiển thị
         return (
             <div>
                 {/* <button onClick={() => }>Click me !</button> */}

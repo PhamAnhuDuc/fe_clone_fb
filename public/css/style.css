@@ -47,6 +47,7 @@ textarea.form-control {
 
 .boder-post {
 	border: 1px solid #ccc;
+	margin-bottom: 16px;
 }
 
 .title-email {
@@ -62,11 +63,65 @@ textarea.form-control {
 	height: 80px !important;
 }
 .mr-top-10 {
-	border-top: 1px solid rebeccapurple;
+	margin: 10px;
+	border: 1px solid rebeccapurple;
+	padding: 5px;
 }
 .card-img-top  {
 	width: 300px;
 }
 .width-400 {
-	width: 400px;
+	width: 525px;
+}
+.email-post-data {
+	font-size: 20px !important;
+	color: blue !important;
+	text-transform: capitalize !important;
+}
+.boder-post > span {
+	font-size: 20px;
+    margin-left: 20px;
+    text-transform: capitalize;
+    color: blue;
+}	
+.card-body > h4 {
+	color: blue;
+    text-transform: capitalize;
+}
+.card-body > h5 {
+    text-transform: capitalize;
+}
+.card-title {
+	font-size: 22px;
+}
+
+.item-email-comment {
+	font-size: 16px;
+    margin-left: 20px;
+    text-transform: capitalize;
+    color: blue;
+}
+
+.comment-content  {
+	margin-left:20px;
+	font-size: 20px;
+	text-transform: capitalize;
+}
+
+.time-post {
+	margin-left:20px;
+	font-size: 12px;
+}
+
+.form-input-detail {
+	margin-left : 10px;
+}
+.name {
+	text-transform: capitalize;
+	display:inline-block;
+	margin-left: 10px;
+}
+.title-name {
+	display: inline-block;
+	
 }

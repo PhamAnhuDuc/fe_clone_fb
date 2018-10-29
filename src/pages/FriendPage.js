@@ -27,13 +27,18 @@ class FriendPage extends Component {
         return (
             <div className="media">
                 <div className="media-left">
-                    <img src="/images/test1.jpg" className="media-object" style={{width: 160}} alt ="test1.jpg"  />
-                    <div>Name : </div>  
-                    <h5>{data ? data.user.full_name : ''}</h5>
+                    {
+                        data ?
+                            <img src={`http://homestead.test/images/${data.user.avatar_image}`} className="media-object" style={{width: 160}} alt ="test1.jpg"  />
+                        : ''
+                    }
+                    
+                    <div className="title-name">Name : </div>  
+                    <h5 className="name">{data ? data.user.full_name : ''}</h5>
                     <div>Email : </div>
-                    <h5>{data ? data.user.email : ''}</h5>
-                    <div>Phone : </div>
-                    <h5>{data ? data.user.phone : ''}</h5>
+                    <h5 className="name" >{data ? data.user.email : ''}</h5>
+                    <div  >Phone : </div>
+                    <h5 className="name" >{data ? data.user.phone : ''}</h5>
                 </div>
                 <div className="media-body">
                     <div className="page-header">
@@ -49,7 +54,7 @@ class FriendPage extends Component {
                         
                     </div>
                     <div className="panel panel-default">
-                        <div className="panel-heading">Nội dung bài Post</div>
+                        <div className="panel-heading">Content Post</div>
                         <div className="panel-body">
                             {this.showPost(postDatas,  data ? data.user.email :'' , isNewPost )}
                         </div>

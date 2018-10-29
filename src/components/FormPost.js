@@ -81,7 +81,7 @@ class FormPost extends Component {
         return (
             <Form onSubmit= {this.handleSubmit} ref={c => { this.form = c }} >
             <label>
-                Cảm nghĩ của bạn:
+                Your opinion:
                 <Input validations={[required]} name ="content" onChange={this.handleChange} value={this.state.value} className="form-control content-post" rows="5" />
                 Select image:
                 <input type="file" onChange={this.handleChange} name ="fileImage" className="filetype" id="group_image"/>

@@ -52,7 +52,7 @@ class PostDetail extends Component {
     showImg = (infoPost) =>{
         if(infoPost.image) {
             return (
-                <img className="card-img-top" src={`http://homestead.test/images/${infoPost.image}`} alt="Card image cap" />
+                <img className="card-img-top" src={`http://homestead.test/images/${infoPost.image}`} alt="Card cap" />
             );
         }else{
             return '';
@@ -68,12 +68,12 @@ class PostDetail extends Component {
                         : <h4>{infoPost.email_post} > {infoPost.email_receive}</h4>
                     }
                     <h5 className="card-title">{infoPost.content}</h5>
-                    <h5 style={{color: 'red', cursor: 'pointer'}} onClick={ () => this.handlerReply(this.props.match.params.id) } >Bình Luận</h5>
+                    <h5 style={{color: 'red', cursor: 'pointer'}} onClick={ () => this.handlerReply(this.props.match.params.id) } >Comment</h5>
                     <div id={`myDIV`}  >
                         <div>{this.showItemComment(listComment , isNewComment)}</div>
                         <form onSubmit={this.handleSubmit}>
-                            <input type="text" value={this.state.content} onChange={this.handleChange} name="content" maxLength={490}/>
-                            <input type="submit" value="Submit" />
+                            <input type="text" value={this.state.content} onChange={this.handleChange} name="content" maxLength={490} />
+                            <input type="submit" value="Post" />
                         </form>
                     </div>
                 </div>

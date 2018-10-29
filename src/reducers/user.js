@@ -24,6 +24,7 @@ let defaultState = {
     messages: '',
     getUser: '' ,
     isFriend : '',
+    changeImage: ''
 }
 
 const user = (state = defaultState, action) => {
@@ -37,7 +38,6 @@ const user = (state = defaultState, action) => {
             state.messages = messages;
             return {
                 ...state,
-                // user_login: action.userRegister,
             }
 
         case types.USER_LOGIN:
@@ -48,6 +48,7 @@ const user = (state = defaultState, action) => {
                 localStorage.setItem("idUserLogin", action.userLogin.id);
                 localStorage.setItem("emailLogin", action.userLogin.email);
                 state.resultSearch = [];
+                localStorage.setItem("avt_img", action.userLogin.avatar_image);
             }
             return  {
                 ...state,
@@ -82,13 +83,20 @@ const user = (state = defaultState, action) => {
             
             index = findIndex(state.listFriend,id);
             state.listFriend = deleteFriend(state.listFriend, index);
-            // state.listFriend = state.listFriend.filter((friend, i) => i !== index);
             return {
                 ...state,
             }
         case types.GET_USER:
             state.getUser = action.user;
             state.isFriend = action.user.flag ? true : false;
+            return {...state}
+        
+        case types.CHANGE_IMAGE:
+            console.log(action.img);
+        
+            state.changeImage = action.img.user.avatar_image;
+            
+            localStorage.setItem("avt_img", action.img.user.avatar_image);
             return {...state}
         default:
             return state;

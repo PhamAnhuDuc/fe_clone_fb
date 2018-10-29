@@ -6,11 +6,11 @@ import YourImages from './../components/YourImages';
 import ListFriend from './../components/ListFriend';
 import NotFound from './../components/NotFound';
 import YourWall from './../components/YourWall';
-
+import { connect} from 'react-redux';
 
 
 const menuCourses = [
-	{to: '/image'	, name: 'Ảnh Đại Diện'},
+	{to: '/image'	, name: 'Avatar'},
 	{to: '/account'	, name: 'Your Account'},
 	{to: '/list-friend'	, name: 'List Friend'},
 	{to: '/your-wall', name : 'Your Wall'}
@@ -53,6 +53,7 @@ class ProfilePage extends Component {
 		}else {
 			main = <NotFound/>;
 		}
+		let {img} = this.props;
         return(
             <div className="panel panel-info">
 				<div className="panel-heading">
@@ -62,8 +63,13 @@ class ProfilePage extends Component {
 					<div className="media">
 						<div className="media-left">
 							<a href="google.com">
-								<img className="media-object" src="/images/739_DucPA.jpg" alt="duc" />
+								{
+									localStorage.getItem('avt_img') === null ? 
+										 <img className="media-object" src={`http://homestead.test/images/no-user.jpg`} alt="duc" width={300}/>
+									: 	 <img className="media-object" src={`http://homestead.test/images/${localStorage.getItem('avt_img')}`} alt="duc" width={300}/>
+									}
 							</a>
+
 							<div className="list-group">
 								{this.showMenus(match.url, menuCourses)}
 							</div>
@@ -92,5 +98,10 @@ class ProfilePage extends Component {
 	}
 }
 
+const mapStateToProps = state => {
+    return {
+        img : state.user.changeImage
+    }
+} 
+export default connect (mapStateToProps,null)(ProfilePage);
 
-export default ProfilePage;

@@ -3,23 +3,22 @@ import {Link} from 'react-router-dom';
 class ContentPost extends Component {
 
     render() {
-        let {postData , isNewPost ,index, email } = this.props;
+        let {postData , isNewPost , email } = this.props;
         postData = postData ? postData : ''; 
-
         return(
             <div className="boder-post">
                 {         
                     isNewPost ? 
                         postData.email_post ?
                             postData.email_post === postData.email_receive ? 
-                                <span>{postData.email_post}</span>
-                            : <div><span className="title-email">{postData.email_post}</span> <div className="glyphicon glyphicon-play"></div><span className="title-email">{postData.email_receive}</span></div>
+                                <span className="email-post-data">{postData.email_post}</span>
+                            : <div><span className="email-post-data">{postData.email_post}</span> <div className="glyphicon glyphicon-play"></div><span className="email-post-data">{postData.email_receive}</span></div>
                         : localStorage.getItem('emailLogin') === email ?
-                                <span>{localStorage.getItem('emailLogin')}</span>
-                            : <div><span>{localStorage.getItem('emailLogin')}</span> > <span>{email}</span></div>
+                                <span className="email-post-data" >{localStorage.getItem('emailLogin')}</span>
+                            : <div><span className="email-post-data" >{localStorage.getItem('emailLogin')}</span><div className="glyphicon glyphicon-play"></div><span className="email-post-data" >{email}</span></div>
                     :   postData.email_post === postData.email_receive ? 
-                            <span>{postData.email_post}</span>
-                        : <div><span className="title-email">{postData.email_post}</span> <div className="glyphicon glyphicon-play"></div><span className="title-email">{postData.email_receive}</span></div>
+                            <span className="email-post-data">{postData.email_post}</span>
+                        : <div><span className="email-post-data">{postData.email_post}</span> <div className="glyphicon glyphicon-play"></div><span className="email-post-data">{postData.email_receive}</span></div>
                 }
 
                 <div className="media" >

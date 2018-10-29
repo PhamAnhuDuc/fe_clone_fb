@@ -14,9 +14,9 @@ class ItemComment extends Component {
         } else {
             return (
                 <div>
-                    <h5>{comment.email_comment}:</h5>
-                    <span>{comment.content}</span> 
-                    <div>Time: {comment.created_at}</div>
+                    <h5 className="item-email-comment">{comment.email_comment}</h5>
+                    <span className="comment-content">{comment.content}</span> 
+                    <div className="time-post">Time: {comment.created_at}</div>
                 </div>
             );
         }

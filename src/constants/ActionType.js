@@ -13,3 +13,4 @@ export const SHOW_All_POST = 'SHOW_All_POST';
 export const POST_ARTICLE_CONTENT = 'POST_ARTICLE_CONTENT';
 export const GET_INFO_POST = 'GET_INFO_POST';
 export const SEND_COMMENT = 'SEND_COMMENT';
+export const CHANGE_IMAGE = 'CHANGE_IMAGE';
