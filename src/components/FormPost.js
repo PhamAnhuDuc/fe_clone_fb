@@ -72,8 +72,6 @@ class FormPost extends Component {
         
         this.form.validateAll();
         if ( this.checkBtn.context._errors.length === 0 ) {
-            
-            
 			this.props.postReuslt(contentPost);
         }
     }

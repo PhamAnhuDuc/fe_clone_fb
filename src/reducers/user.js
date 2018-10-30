@@ -24,7 +24,8 @@ let defaultState = {
     messages: '',
     getUser: '' ,
     isFriend : '',
-    changeImage: ''
+    changeImage: '',
+    changePassword: '',
 }
 
 const user = (state = defaultState, action) => {
@@ -92,12 +93,13 @@ const user = (state = defaultState, action) => {
             return {...state}
         
         case types.CHANGE_IMAGE:
-            console.log(action.img);
-        
             state.changeImage = action.img.user.avatar_image;
             
             localStorage.setItem("avt_img", action.img.user.avatar_image);
             return {...state}
+
+        case types.CHANGE_PASSWORD:
+            state.changePassword = action;
         default:
             return state;
     }

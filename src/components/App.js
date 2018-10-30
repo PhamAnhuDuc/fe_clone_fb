@@ -5,22 +5,22 @@ import {
     Switch
 } from 'react-router-dom';
 import routes from './../route-config';
-import Title from './../components/Title';
-import Notify from './../components/Notify';
 import Menu from './../components/Menu';
+import FormSearch from './../components/FormSearch';
 
 class App extends Component {
     render() {
         return (
             <Router>
                 <div className="container">
-                    <Title/>
-                    <Notify/>
                     <div className="row">
-                        <div className="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                            <Menu />
+                        <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <div className="wapper-header">
+                                 <FormSearch />
+                                 <Menu />
+                            </div>
                         </div>
-                        <div className="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                        <div className="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                             {this.showRoute(routes)}
                         </div>
                     </div>

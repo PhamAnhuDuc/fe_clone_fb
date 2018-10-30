@@ -64,7 +64,7 @@ class ProfilePage extends Component {
 						<div className="media-left">
 							<a href="google.com">
 								{
-									localStorage.getItem('avt_img') === null ? 
+									localStorage.getItem('avt_img') === 'null' ? 
 										 <img className="media-object" src={`http://homestead.test/images/no-user.jpg`} alt="duc" width={300}/>
 									: 	 <img className="media-object" src={`http://homestead.test/images/${localStorage.getItem('avt_img')}`} alt="duc" width={300}/>
 									}

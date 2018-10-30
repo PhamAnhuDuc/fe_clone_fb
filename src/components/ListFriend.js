@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Friend from './../components/Friend';
 import { connect } from 'react-redux';
 import { getAllListFriend } from '../actions/index';
-
+import { Redirect } from 'react-router-dom';
 
 class ListFriend extends Component {
     handleDelete = (id) => {
@@ -12,6 +12,10 @@ class ListFriend extends Component {
         this.props.fetchAllFriends();
     }
     render() {
+        let isLogin = localStorage.getItem("isLogIn");
+        if(isLogin !== 'true') {
+            return <Redirect to='/signin'/>;
+        }
         let friends = this.props.friends;
         return(
             <table className="table table-hover">

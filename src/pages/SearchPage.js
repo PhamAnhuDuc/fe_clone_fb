@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import FormSearch from './../components/FormSearch';
 import ListItem from '../components/ListItem';
 import Item from '../components/Item';
 import { connect } from 'react-redux';
@@ -14,7 +13,6 @@ class SearchPage extends Component {
 					<h3 className="panel-title">Search </h3>
 				</div>
 				<div className="panel-body">
-					<FormSearch />
 					<ListItem>
 						{this.showItem(items)}
 					</ListItem>

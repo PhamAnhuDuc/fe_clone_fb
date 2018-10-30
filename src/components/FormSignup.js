@@ -77,6 +77,7 @@ class FormSignup extends Component {
 					<div className="col-sm-6">
 						<Input name="password_confirm" validations={[Validate.required, Validate.minLength]} value={this.state.password_confirm} onChange={this.handleChange}  type="text" className="form-control" id="inputPassword4" placeholder="Password confirm" />
 					</div>
+						{message === undefined ? '' : message.password_confirm}
 				</div>
                 <div className="form-group">
 					<label htmlFor="phone3" className="col-sm-2 control-label">Phone</label>

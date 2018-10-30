@@ -1,5 +1,6 @@
 import * as types from './../constants/ActionType';
 import callApi from './../utils/index';
+export * from './profile';
 
 //API - all 
 export const actRegisterRequest = (userRegister) => {
@@ -52,24 +53,6 @@ export const actLogout = () => {
 	}
 }
 
-//API POST Bài viết
-export const actPostRequest =  (post) => {
-    console.log(post);
-    
-    return dispatch => {
-        return callApi('post', 'POST', post, {'access-token': localStorage.getItem('access-token')}).then(res => {
-            res = res ? res.data : '';
-            dispatch(actPost(res));
-        })
-    }
-}
-
-export const actPost = (post) => {
-	return {
-        type : types.POST_CONTENT,
-        post,
-	}
-}
 
 // api GET LITS FIEND
 
@@ -111,10 +94,9 @@ export const actGetAllPost = (dataPost) => {
 
 
 //SEARCH REQUEST
-export const getSearchRequest = (search,sortBy) => {
-    let name = sortBy;
+export const getSearchRequest = (search) => {
     return dispatch => {
-        return callApi(`user/search?${name}=${search}`, 'GET', null).then(res => {
+        return callApi(`user/search?search=${search}`, 'GET', null).then(res => {
             res = res ? res.data : '';
             dispatch(actSearch(res));
         })
@@ -236,3 +218,37 @@ export const actChangeImage = (img) => {
 	}
 }
 
+
+//Change Password
+export const actChangePassWordRequest = (passwordObj) => {
+    return dispatch => {
+        return  callApi('user/change-password', 'POST', passwordObj, {'access-token': localStorage.getItem('access-token')}).then(res => {
+            dispatch(actChangePassWord(passwordObj));
+             console.log(res.data);
+            
+            let messageChangePass = '';
+            if(res && res.data) {
+                if(res.data.detail) {
+                    messageChangePass = res.data.detail.newPasswordConfirm[0];
+                }else {
+                    messageChangePass = res.data.message;
+                }
+                
+            }
+            alert(messageChangePass);
+        })
+    }
+}
+export const actChangePassWord = (passwordObj) => {
+	return {
+        type : types.CHANGE_PASSWORD,
+        passwordObj,
+	}
+}
+
+
+//Change PAss thông qua email
+
+export const  actChangePassWordEmailRequest = (email) => {
+    
+}

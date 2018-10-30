@@ -9,7 +9,7 @@ import Account from './components/Account';
 import SearchPage from './pages/SearchPage';
 import FriendPage from './pages/FriendPage';
 import PostDetails from './components/PostDetail';
-
+import Forgotpass from './components/ForgotPassPage/Forgotpass';
 const router = [
     {
         path: '/signin',
@@ -39,7 +39,7 @@ const router = [
     },
     {
         path: '/search',
-        exact : true,
+        exact : false,
         main : () => <SearchPage />
     },
     {
@@ -53,9 +53,16 @@ const router = [
         main : (match , history) => <PostDetails {...match}   {...history}/>
     },
     {
+        path: '/reset-pass',
+        exact: true,
+        main: () => <Forgotpass />
+    },
+    {
         path: '',
         exact: true,
         main: () => <NotfoundPage />
     },
+    
+    
 ];
 export default router;

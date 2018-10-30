@@ -125,3 +125,36 @@ textarea.form-control {
 	display: inline-block;
 	
 }
+.menu {
+	display: inline-block;
+    float: right;
+}
+.menu > .list-group > a.list-group-item {
+	display: inline-block ;
+	border-radius: 0;
+}
+.menu > .list-group {
+	margin : 10px 0;
+}
+.wapper-header {
+	background-color: #2661ab;
+	display: inline-block;
+	padding: 5px;
+}
+/* .wapper-header > .input-group > .form-control {
+	margin-top: 5px;
+}  */
+
+.menu {
+    margin-top: 5px;
+	padding: 0 10px;
+	
+	font-weight: bold;
+
+}
+.menu > a {
+	color: #ccc;
+}
+.menu > a.active {
+	color: #fff;
+}

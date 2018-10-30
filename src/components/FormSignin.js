@@ -5,7 +5,7 @@ import Form from 'react-validation/build/form';
 import Input from 'react-validation/build/input';
 import CheckButton from 'react-validation/build/button';
 import { isEmail, isEmpty } from 'validator';
-
+import { Link } from 'react-router-dom';
 const required = (value) => {
 	if (isEmpty(value)) {
 		return <small className="form-text text-danger">This field is required</small>;
@@ -74,6 +74,7 @@ class FormSignin extends Component {
 					<div className="col-sm-offset-2 col-sm-6">
 						<button type="submit" className="btn btn-success">Sign in</button>
 						<CheckButton style={{ display: 'none' }} ref={c => { this.checkBtn = c }} />
+						<Link to='/reset-pass'>Reset Password</Link>
 					</div>
 				</div>
 			</Form>

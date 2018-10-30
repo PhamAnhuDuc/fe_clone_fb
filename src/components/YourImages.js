@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect} from 'react-redux';
 import { actChangeImageRequest } from './../actions/index';
+import { Redirect } from 'react-router-dom';
 class YourImages extends Component {
     constructor(props) {
         super(props);
@@ -36,7 +37,10 @@ class YourImages extends Component {
         this.props.changImage(data);
     }
     render() {
-        
+        let isLogin = localStorage.getItem("isLogIn");
+        if(isLogin !== 'true') {
+            return <Redirect to='/signin'/>;
+        }
         return(
             <form name="userForm" onSubmit={this.handleSubmit} >
                 <div className="panel panel-default">
