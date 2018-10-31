@@ -26,6 +26,8 @@ let defaultState = {
     isFriend : '',
     changeImage: '',
     changePassword: '',
+    forgotPassWord: '',
+    messageForgotPass : '',
 }
 
 const user = (state = defaultState, action) => {
@@ -65,8 +67,9 @@ const user = (state = defaultState, action) => {
                 ...state,
             }
 
-        case types.SEARCH: 
-            state.resultSearch = action.search;
+        case types.SEARCH:
+            state.textSearch = action.search.search;
+            state.resultSearch = action.search.users.data;
             return {...state}
 
         case types.ADD_FRIEND: 
@@ -98,8 +101,13 @@ const user = (state = defaultState, action) => {
             localStorage.setItem("avt_img", action.img.user.avatar_image);
             return {...state}
 
-        case types.CHANGE_PASSWORD:
-            state.changePassword = action;
+        // case types.CHANGE_PASSWORD:
+        //     state.changePassword = action;
+
+        case types.FORGOT_PASS:
+            state.forgotPassWord = action.data.flag;
+            state.messageForgotPass = action.data.message;
+            return {...state}
         default:
             return state;
     }

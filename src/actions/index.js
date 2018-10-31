@@ -94,10 +94,19 @@ export const actGetAllPost = (dataPost) => {
 
 
 //SEARCH REQUEST
-export const getSearchRequest = (search) => {
+export const getSearchRequest = (param) => {
+    // console.log(param);
+    
     return dispatch => {
-        return callApi(`user/search?search=${search}`, 'GET', null).then(res => {
-            res = res ? res.data : '';
+        return callApi(`user/search?${param}`, 'GET', null, null).then(res => {
+            // console.log(res);
+            if (res && res.data) {
+                res = res.data;
+            } else {
+                res = '';
+            }
+            // console.log(res);
+            
             dispatch(actSearch(res));
         })
     }
@@ -224,16 +233,13 @@ export const actChangePassWordRequest = (passwordObj) => {
     return dispatch => {
         return  callApi('user/change-password', 'POST', passwordObj, {'access-token': localStorage.getItem('access-token')}).then(res => {
             dispatch(actChangePassWord(passwordObj));
-             console.log(res.data);
-            
             let messageChangePass = '';
             if(res && res.data) {
                 if(res.data.detail) {
                     messageChangePass = res.data.detail.newPasswordConfirm[0];
                 }else {
                     messageChangePass = res.data.message;
-                }
-                
+                } 
             }
             alert(messageChangePass);
         })
@@ -246,9 +252,39 @@ export const actChangePassWord = (passwordObj) => {
 	}
 }
 
-
-//Change PAss thông qua email
-
-export const  actChangePassWordEmailRequest = (email) => {
-    
+//GET Access Tokkent
+export const  actAccessTokenRequest = (email) => {
+    return dispatch => {
+        return callApi('user/forgot-password','POST',email,null).then(res=> {
+           dispatch(actForgotPass(res.data));
+        });
+    }
 }
+export const actForgotPass = (data) => {
+	return {
+        type : types.FORGOT_PASS,
+        data,
+	}
+}
+
+
+
+//RESET PASSWORD
+export const  actResetPasswordRequest = (passwordObj) => {
+    
+    
+    return dispatch => {
+        return callApi('user/reset-pass','POST',passwordObj,null).then(res=> {
+            let messageChangePass = '';
+            if(res && res.data) {
+                if(res.data.detail) {
+                    messageChangePass = res.data.detail.newPasswordConfirm[0];
+                }else {
+                    messageChangePass = res.data.message;
+                } 
+            }
+            alert(messageChangePass);
+        });
+    }
+}
+

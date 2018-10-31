@@ -16,7 +16,9 @@ class FormSearch extends Component {
     }
     
     handleSubmit = (event) => {
-         this.props.goSearch(this.state.strSearch);
+        let url = document.getElementById('search').href;
+        let param = url.split('?');
+		this.props.goSearch(param[param.length - 1]);
     }
     
     render() {
@@ -26,7 +28,7 @@ class FormSearch extends Component {
                     <div className="input-group">
                         <input type="text" name="strSearch" className="form-control" value = {this.state.strSearch} onChange={this.handleChange} placeholder="Search for..."/>
                         <span className="input-group-btn">
-                            <Link to= '/search' onClick={ this.handleSubmit } className="btn btn-info" type="button">Go!</Link>
+                            <Link to= {`/search?search=${this.state.strSearch}`} onClick={ this.handleSubmit } className="btn btn-info" type="button" id="search">Go!</Link>
                         </span>
                     </div>
                 </div>
@@ -38,10 +40,11 @@ class FormSearch extends Component {
 
 const mapDispatchToProps = (dispatch,Props) => {
     return {
-        goSearch : (search, sortBy) => {
-            dispatch(getSearchRequest(search, sortBy));
+        goSearch : (search) => {
+            dispatch(getSearchRequest(search));
        }
     }
 }
 
 export default connect (null,mapDispatchToProps)(FormSearch);
+// export default FormSearch;

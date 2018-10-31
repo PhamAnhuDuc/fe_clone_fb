@@ -74,7 +74,7 @@ class FormSignin extends Component {
 					<div className="col-sm-offset-2 col-sm-6">
 						<button type="submit" className="btn btn-success">Sign in</button>
 						<CheckButton style={{ display: 'none' }} ref={c => { this.checkBtn = c }} />
-						<Link to='/reset-pass'>Reset Password</Link>
+						<Link to='/forgot-pass'>Reset Password</Link>
 					</div>
 				</div>
 			</Form>

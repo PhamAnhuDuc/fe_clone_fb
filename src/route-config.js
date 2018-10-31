@@ -10,6 +10,7 @@ import SearchPage from './pages/SearchPage';
 import FriendPage from './pages/FriendPage';
 import PostDetails from './components/PostDetail';
 import Forgotpass from './components/ForgotPassPage/Forgotpass';
+import ResetPassword from './components/ForgotPassPage/ResetPassword';
 const router = [
     {
         path: '/signin',
@@ -55,7 +56,12 @@ const router = [
     {
         path: '/reset-pass',
         exact: true,
-        main: () => <Forgotpass />
+        main: () => <ResetPassword />
+    },
+    {
+        path: '/forgot-pass',
+        exact: true,
+        main: () => <Forgotpass/>
     },
     {
         path: '',

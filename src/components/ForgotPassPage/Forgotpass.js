@@ -1,34 +1,39 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { actChangePassWordRequest  , actChangePassWordEmailRequest } from '../../actions';
+import { actAccessTokenRequest  , actChangePassWordEmailRequest } from '../../actions';
+import { Redirect } from 'react-router-dom';
 
+let $flag = false;
 class Forgotpass extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: ''
+            email: '',
         };
-    
-        this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-    }
-    
-    handleChange(event) {
-        this.setState({email: event.target.value});
     }
 
     handleSubmit(event) {
-        alert('A name was submitted: ' + this.state.email);
+        $flag = true;
         event.preventDefault();
+        let email = document.querySelector('input[type="email"]').value; 
+        this.props.onChangeEmailPass({email: email});
     }
     render() {
+        let {forgotPass, message} = this.props;
+        if (forgotPass === false) {
+            alert(message);
+        }
+        if (forgotPass === true) {
+            return <Redirect to='/reset-pass' />
+        }
         return(
             <div className="col-xs-5 col-sm-5 col-md-5 col-lg-5">
                 <form onSubmit={this.handleSubmit} >
                     <legend>Please enter an email to reset your password</legend>
                     <div className="form-group">
                     <label htmlFor="true" >Email</label>
-                        <input type="email" className="form-control" placeholder="email" value={this.state.email} onChange={this.handleChange} />
+                        <input type="email" className="form-control" placeholder="email" />
                     </div>
                     <button type="submit" className="btn btn-primary">Submit</button>
                 </form>
@@ -40,10 +45,18 @@ class Forgotpass extends Component {
 const mapDispatchToProps = (dispatch , props) => {
     return {
         onChangeEmailPass : (email) => {
-            dispatch(actChangePassWordEmailRequest(email));
+            dispatch(actAccessTokenRequest(email));
         } 
     }
-
-    
 }
-export default connect (null, mapDispatchToProps)(Forgotpass);
+const mapStateToProps = state => {
+    if ($flag) { //nếu true thì cho nó nhận state mới  
+        $flag = false; //
+        return {
+            forgotPass : state.user.forgotPassWord,
+            message: state.user.messageForgotPass
+        }
+    }
+}
+
+export default connect (mapStateToProps, mapDispatchToProps)(Forgotpass);
