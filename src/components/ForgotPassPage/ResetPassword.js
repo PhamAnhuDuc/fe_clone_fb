@@ -6,9 +6,6 @@ import Input from 'react-validation/build/input';
 import CheckButton from 'react-validation/build/button';
 import { actResetPasswordRequest } from './../../actions/index';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
-
-
 
 class ResetPassword extends Component {
     constructor(props) {

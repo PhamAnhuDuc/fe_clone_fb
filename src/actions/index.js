@@ -95,17 +95,13 @@ export const actGetAllPost = (dataPost) => {
 
 //SEARCH REQUEST
 export const getSearchRequest = (param) => {
-    // console.log(param);
-    
     return dispatch => {
         return callApi(`user/search?${param}`, 'GET', null, null).then(res => {
-            // console.log(res);
             if (res && res.data) {
                 res = res.data;
             } else {
                 res = '';
             }
-            // console.log(res);
             
             dispatch(actSearch(res));
         })

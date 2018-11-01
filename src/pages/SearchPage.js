@@ -12,20 +12,17 @@ class SearchPage extends Component {
 		let param = url.split('?');
 		this.props.onSearch(param[param.length - 1]);
 	}
-	handleClick = () => {
-		
+	componentDidMount() {
+		let tmp = this;
 		document.addEventListener('DOMContentLoaded', function() {
 			let app = document.getElementById('todo-app');
-			alert('a')
 			let items = app.getElementsByClassName('page-link');
-			
-			// attach event listener to each item
 			for (let item of items) {
 				item.addEventListener('click', function() {
 					let url = item.href;
 					let param = url.split('?');
-					alert(item.innerHTML);
-					this.props.onSearch(param[param.length - 1]);
+					// alert(item.innerHTML);
+					tmp.props.onSearch(param[param.length - 1]);
 				});
 			}
 		});
@@ -44,7 +41,7 @@ class SearchPage extends Component {
 						{this.showItem(items)}
 					</ListItem>
 					<nav aria-label="Page navigation example">
-						<ul className="pagination" id="todo-app" onClick={this.handleClick}>
+						<ul className="pagination" id="todo-app">
 							<li className="page-item">
 								<a className="page-link" href="#" aria-label="Previous">
 								<span aria-hidden="true">«</span>
@@ -66,9 +63,20 @@ class SearchPage extends Component {
 			</div>
         ); 
 	}
-	showItem(items){
+	// showLiMenu(pages) {
+	// 	let result = null;
+	// 	if (pages.length > 0 ) {
+	// 		result = pages.map((item,index) => {
+	// 			return (
+	// 				<li className="page-item"><Link to={`search?search=${textSearch}&page=2`} className="page-link" id="test2" >2</Link></li>
+	// 			);
+	// 		});
+	// 	}
+	// }
+
+	showItem(items) {
 		let result = null;
-		if(items.length > 0) {
+		if (items.length > 0) {
 			result = items.map((item,index) => {
 				return (
 					<Item item = {item} index = {index} key={index} />
@@ -80,6 +88,7 @@ class SearchPage extends Component {
 }
 
 const mapStateToProps = state => {
+	
 	return {
 		items : state.user.resultSearch,
 		textSearch : state.user.textSearch,

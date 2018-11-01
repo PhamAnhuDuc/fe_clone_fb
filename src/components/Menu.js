@@ -25,7 +25,6 @@ const MenuLink = ({ menu }) => {
 class Menu extends Component {
 	componentWillMount(){
 		this.createMenu();
-
 	}
 	render() {
 		return (

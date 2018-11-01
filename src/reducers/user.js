@@ -68,6 +68,8 @@ const user = (state = defaultState, action) => {
             }
 
         case types.SEARCH:
+            //console.log(action.search);
+            
             state.textSearch = action.search.search;
             state.resultSearch = action.search.users.data;
             return {...state}

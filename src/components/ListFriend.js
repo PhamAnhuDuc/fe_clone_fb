@@ -24,6 +24,7 @@ class ListFriend extends Component {
                     <th>STT</th>
                     <th>Name</th>
                     <th>Email</th>
+                    <th>BestFriend</th>
                     <th>Add</th>
                     <th>Delete</th>
                 </tr>

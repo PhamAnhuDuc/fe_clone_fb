@@ -14,6 +14,7 @@ class Friend extends Component {
                 <td>{index + 1}</td>
                 <td>{friend.full_name}</td>
                 <td>{friend.email}</td>
+                <td><div className="glyphicon glyphicon-ok" ></div></td>
                 <td><Link to={`/user/${friend.id}`} className="btn btn-success">Go</Link></td>
                 <td><button onClick={() => this.handleDelete(friend.id)} type="submit" className="btn btn-danger">Delete</button></td>
             </tr>

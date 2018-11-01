@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { actAccessTokenRequest  , actChangePassWordEmailRequest } from '../../actions';
+import { actAccessTokenRequest } from '../../actions';
 import { Redirect } from 'react-router-dom';
 
 let $flag = false;
