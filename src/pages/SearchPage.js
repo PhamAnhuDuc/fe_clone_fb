@@ -12,27 +12,32 @@ class SearchPage extends Component {
 		let param = url.split('?');
 		this.props.onSearch(param[param.length - 1]);
 	}
-	componentDidMount() {
-		let tmp = this;
-		document.addEventListener('DOMContentLoaded', function() {
-			let app = document.getElementById('todo-app');
-			let items = app.getElementsByClassName('page-link');
-			for (let item of items) {
-				item.addEventListener('click', function() {
-					let url = item.href;
-					let param = url.split('?');
-					// alert(item.innerHTML);
-					tmp.props.onSearch(param[param.length - 1]);
-				});
-			}
-		});
+
+	handleClick = (param) => {
+		this.props.onSearch(param);
 	}
 	
     render() {
-		let items = this.props.items;
-		let textSearch = this.props.textSearch;
+		let { items, textSearch, lastPage } = this.props;
+		let result = '';
+		
+		if (lastPage > 0) {
+			let arr = [];
+			for (var i = 0; i < lastPage; i++) {
+				arr.push({i}) ;
+			}
+
+			result = arr.map((page, index) => {
+				return (
+					<li className="page-item" key={index}>
+						<Link to={`search?search=${textSearch}&page=${index + 1}`} onClick={() => this.handleClick(`search=${textSearch}&page=${index + 1}`) } className="page-link" >{index + 1}</Link>
+					</li>
+				);
+			});
+		}
+
         return(
-            <div className="panel panel-info">
+	        <div className="panel panel-info">
 				<div className="panel-heading">
 					<h3 className="panel-title">Search </h3>
 				</div>
@@ -44,17 +49,16 @@ class SearchPage extends Component {
 						<ul className="pagination" id="todo-app">
 							<li className="page-item">
 								<a className="page-link" href="#" aria-label="Previous">
-								<span aria-hidden="true">«</span>
-								<span className="sr-only">Previous</span>
+									<span aria-hidden="true">«</span>
+									<span className="sr-only">Previous</span>
 								</a>
 							</li>
-							<li className="page-item"><Link to={`search?search=${textSearch}&page=1`} className="page-link" >1</Link></li>
-							<li className="page-item"><Link to={`search?search=${textSearch}&page=2`} className="page-link" id="test2" >2</Link></li>
-							<li className="page-item"><Link to={`search?search=${textSearch}&page=3`} className="page-link" >3</Link></li>
+							
+							{ result }
 							<li className="page-item">
 								<a className="page-link" href="#" aria-label="Next">
-								<span aria-hidden="true">»</span>
-								<span className="sr-only">Next</span>
+									<span aria-hidden="true">»</span>
+									<span className="sr-only">Next</span>
 								</a>
 							</li>
 						</ul>
@@ -63,20 +67,10 @@ class SearchPage extends Component {
 			</div>
         ); 
 	}
-	// showLiMenu(pages) {
-	// 	let result = null;
-	// 	if (pages.length > 0 ) {
-	// 		result = pages.map((item,index) => {
-	// 			return (
-	// 				<li className="page-item"><Link to={`search?search=${textSearch}&page=2`} className="page-link" id="test2" >2</Link></li>
-	// 			);
-	// 		});
-	// 	}
-	// }
 
-	showItem(items) {
+	showItem(items){
 		let result = null;
-		if (items.length > 0) {
+		if(items && items.length > 0) {
 			result = items.map((item,index) => {
 				return (
 					<Item item = {item} index = {index} key={index} />
@@ -88,10 +82,10 @@ class SearchPage extends Component {
 }
 
 const mapStateToProps = state => {
-	
 	return {
 		items : state.user.resultSearch,
 		textSearch : state.user.textSearch,
+		lastPage: state.user.lastPage,
 	}
 }
 

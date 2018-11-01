@@ -28,6 +28,7 @@ let defaultState = {
     changePassword: '',
     forgotPassWord: '',
     messageForgotPass : '',
+    lastPage : 0,
 }
 
 const user = (state = defaultState, action) => {
@@ -69,9 +70,9 @@ const user = (state = defaultState, action) => {
 
         case types.SEARCH:
             //console.log(action.search);
-            
+            state.lastPage = action.search.users ? action.search.users.last_page : 0;
             state.textSearch = action.search.search;
-            state.resultSearch = action.search.users.data;
+            state.resultSearch = action.search.users ? action.search.users.data : [];
             return {...state}
 
         case types.ADD_FRIEND: 
