@@ -17,3 +17,5 @@ export const CHANGE_IMAGE = 'CHANGE_IMAGE';
 export const CHANGE_PASSWORD = 'CHANGE_PASSWORD';
 export const REST_PASSWORD = 'REST_PASSWORD';
 export const FORGOT_PASS = 'FORGOT_PASS';
+export const OPEN_CHAT = 'OPEN_CHAT';
+export const CLOSE_CHAT = 'CLOSE_CHAT';

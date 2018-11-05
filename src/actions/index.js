@@ -269,15 +269,13 @@ export const actForgotPass = (data) => {
 
 //RESET PASSWORD
 export const  actResetPasswordRequest = (passwordObj) => {
-    
-    
     return dispatch => {
         return callApi('user/reset-pass','POST',passwordObj,null).then(res=> {
             let messageChangePass = '';
             if(res && res.data) {
                 if(res.data.detail) {
                     messageChangePass = res.data.detail.newPasswordConfirm[0];
-                }else {
+                } else {
                     messageChangePass = res.data.message;
                 } 
             }
@@ -286,3 +284,15 @@ export const  actResetPasswordRequest = (passwordObj) => {
     }
 }
 
+//act - chat 
+export const actChatItem = () => {
+    return {
+        type : types.OPEN_CHAT,
+	}
+}
+
+export const actCloseChat = () => {
+    return {
+        type : types.CLOSE_CHAT,
+	}
+}

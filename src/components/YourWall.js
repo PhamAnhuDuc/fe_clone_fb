@@ -27,7 +27,6 @@ class YourWall extends Component {
             <div>
                 <div className="page-header">
                 <FormPost/>
-                <button onClick={this.handleLogOut} type="submit" className="btn btn-danger">LOGOUT</button>
                 </div>
                 <div className="panel panel-default">
                     <div className="panel-heading">Content Post</div>

@@ -68,6 +68,17 @@ class PostDetail extends Component {
                         : <h4>{infoPost.email_post} > {infoPost.email_receive}</h4>
                     }
                     <h5 className="card-title">{infoPost.content}</h5>
+                    <div className="show-icon">
+                        <div className="icon-item">
+                            <i className="fa fa-thumbs-up" aria-hidden="true"></i>
+                            <div className ="total">30</div>
+                        </div>
+                        <div className="icon-item">
+                            <i className="fa fa-thumbs-down" aria-hidden="true"></i>
+                            <div className = "total">30</div>
+                        </div>
+                        <a className="sheare" >Chia sẻ</a>
+                    </div>
                     <h5 style={{color: 'red', cursor: 'pointer'}} onClick={ () => this.handlerReply(this.props.match.params.id) } >Comment</h5>
                     <div id={`myDIV`}  >
                         <div>{this.showItemComment(listComment , isNewComment)}</div>
