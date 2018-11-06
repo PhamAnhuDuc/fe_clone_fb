@@ -29,6 +29,7 @@ let defaultState = {
     forgotPassWord: '',
     messageForgotPass : '',
     lastPage : 0,
+    listFriendChat:[],
 }
 
 const user = (state = defaultState, action) => {
@@ -94,8 +95,11 @@ const user = (state = defaultState, action) => {
                 ...state,
             }
         case types.GET_USER:
+            // console.log(action);
+        
             state.getUser = action.user;
             state.isFriend = action.user.flag ? true : false;
+            // state.listFriendChat = action.user.listFriend
             return {...state}
         
         case types.CHANGE_IMAGE:

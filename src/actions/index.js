@@ -285,14 +285,16 @@ export const  actResetPasswordRequest = (passwordObj) => {
 }
 
 //act - chat 
-export const actChatItem = () => {
+export const actChatItem = (id) => {
     return {
         type : types.OPEN_CHAT,
+        id
 	}
 }
 
-export const actCloseChat = () => {
+export const actCloseChat = (id) => {
     return {
         type : types.CLOSE_CHAT,
+        id
 	}
 }

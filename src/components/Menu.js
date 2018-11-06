@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Route, NavLink} from 'react-router-dom';
+import {Route, NavLink , Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import { actLogout } from './../actions/index';
 
@@ -28,9 +28,9 @@ class Menu extends Component {
 	}
 	render() {
 		return (
-			<div className="list-group">
+			<div className="list-group menu-right">
 				{
-					localStorage.getItem('isLogIn') ? <div className = "menu"><a  href="" onClick={this.props.LogOut}>LogOut</a></div>
+					localStorage.getItem('isLogIn') ? <div className = "menu"><Link  to="/signin" onClick={this.props.LogOut}>LogOut</Link></div>
 					: ""
 				}
 				{this.showMenus()}

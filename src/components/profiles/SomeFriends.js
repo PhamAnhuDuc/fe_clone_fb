@@ -1,61 +1,38 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { actChatItem } from './../../actions/index';
+import * as Config from './../../constants/Config';
 
 class SomeFriends extends Component {
-   
-    handleClick = () => {
-        this.props.showChat();
+    constructor(props) {
+        super(props);
+        this.handleClick = this.handleClick.bind(this);
+    }
+    handleClick = (id) => {
+        this.props.showChat(id);
     }
     render() {
+        let {friend, id} = this.props;
         return(
-            <div className="panel panel-primary wap-chat">
-                <div className="panel-body">
-                    <ul className="list-group list-item-chat">
-                        <li onClick={ this.handleClick } className="list-group-item" >
-                            <div className="media">
-                                <div className="media-left">
-                                <img src="/images/test1.jpg" alt = "aa" className="media-object" style={{width: 60}} />
-                                </div>
-                                <div className="media-body width-150">
-                                    <h5 className="media-heading name-user">John Doe</h5>
-                                    <i className="fa fa-circle-o user-online mg-l-10" aria-hidden="true"></i>
-                                </div>
-                            </div>
-                        </li>
-                        <li className="list-group-item">
-                            <div className="media">
-                                <div className="media-left">
-                                <img src="/images/test1.jpg" alt = "aa" className="media-object" style={{width: 60}} />
-                                </div>
-                                <div className="media-body width-150 ">
-                                    <h5 className="media-heading name-user">John Doe</h5>
-                                    <i className="fa fa-circle-o user-online mg-l-10" aria-hidden="true"></i>
-                                </div>
-                            </div>
-                        </li>
-                        <li className="list-group-item">
-                        <div className="media">
-                            <div className="media-left">
-                                <img src="/images/test1.jpg" alt = "aa" className="media-object" style={{width: 60}} />
-                                </div>
-                                <div className="media-body">
-                                    <h5 className="media-heading name-user">John Doe</h5>
-                                    <i className="fa fa-circle-o user-online mg-l-10" aria-hidden="true"></i>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
+            <li onClick={() => this.handleClick(id) } className="list-group-item" >
+                <div className="media">
+                    <div className="media-left">
+                    <img src={`${Config.API_URL_IMAGE}${friend.avatar_image}`} alt = "avt" className="media-object img-some-friend"/>
+                    </div>
+                    <div className="media-body width-150">
+                        <h6 className="media-heading name-user">{friend.full_name}</h6>
+                        <i className="fa fa-circle-o user-online mg-l-10" aria-hidden="true"></i>
+                    </div>
                 </div>
-            </div>
+            </li>
         );
     }
 }
 
 const mapDispathToProps = (dispatch, props) => {
     return { 
-        showChat : () => {
-            dispatch(actChatItem());
+        showChat : (id) => {
+            dispatch(actChatItem(id));
         }
     } 
     

@@ -31,7 +31,7 @@ class ProfilePage extends Component {
 	}
 	
     render() {
-		let {isShowChat } = this.props;
+		let {isShowChat, listFriendChat, listChat } = this.props;
 		
 		let {match} = this.props,
 			main = '';
@@ -88,18 +88,41 @@ class ProfilePage extends Component {
 				</div>
 				</div>
 				<div className="col-xs-3 col-sm-3 col-md-3 col-lg-3 some-friends">
-					<SomeFriends />
-					{this.showChat(isShowChat)}
+					<div className="panel panel-primary wap-chat">
+                		<div className="panel-body">
+                    		<ul className="list-group list-item-chat">
+							{this.showListFriendChat(listFriendChat)}
+							</ul>
+						</div>
+					</div>
+					<div className="list-chat">
+						{this.showChat(isShowChat, listChat)}
+					</div>
 				</div>
 			</div>
-            
         ); 
 	}
-	showChat(isShowChat) {
-		if (isShowChat === true ) {
-			return <Chat />
+	showListFriendChat(listFriendChat) {
+		let xhtml = null;
+		listFriendChat = listFriendChat ? listFriendChat : [];
+		if(listFriendChat.length > 0) {
+			xhtml = listFriendChat.map((friend, index)=> {
+				return <SomeFriends key={index} friend={friend} id={friend.id}/>
+			})
 		}
+		return xhtml;
 	}
+	showChat(isShowChat, listChat) {
+		listChat = listChat ? listChat : [];
+		let html = '';
+		if (listChat.length > 0 ) {
+			html = listChat.map((chat, index) => {
+				return <Chat key={index} idChat={chat}/>
+			});
+		}
+		return html;
+	}
+	
 	showMenus(url, menus){
     	let xhtml = null;
 		if(menus.length > 0 ){
@@ -120,6 +143,8 @@ const mapStateToProps = state => {
     return {
 		img : state.user.changeImage,
 		isShowChat : state.chat,
+		listFriendChat: state.user.getUser.listFriend,
+		listChat: state.chat.listChat,
     }
 } 
 export default connect (mapStateToProps,null)(ProfilePage);

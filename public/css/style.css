@@ -161,13 +161,13 @@ textarea.form-control {
 
 .name-user {
 	display: inline-block;
-	margin-top: 5px !important;
+	margin: 12px 0 !important;
 }
 .user-online {
 	color: #00d0ff;
 }
 .mg-l-10 {
-	margin: 10px 0;
+	margin: 12px 2px;
 	float: right;
 }
 
@@ -203,10 +203,10 @@ textarea.form-control {
 	display: block;
 }
 .chat-item {
-	position: fixed;
+	float: right;
 	width: 250px;
-    right: 337px;
-	bottom: -20px;
+	margin-right:5px;
+	position: relative;
 }
 .icon-close {
 	position: absolute;
@@ -221,6 +221,7 @@ textarea.form-control {
 	z-index: 2;
 	top: 43px;
 	padding: 0 !important;
+	width: 20% !important;
 }
 .some-friends  > .wap-chat{
 	height: 100%;
@@ -237,4 +238,36 @@ textarea.form-control {
 }
 .width-150 {
 	width: 150px !important;
+}
+.menu-right {
+	display: inline-block;
+	margin-bottom: 0px !important;
+	margin-left: 100px;
+}
+
+.form-chat {
+	width: 100%;
+}
+
+
+.list-chat {
+	position: fixed;
+    bottom: -20px;
+    left: 0;
+    /* border: 1px solid red; */
+    width: 80%;
+}
+.mg-b-0 {
+	margin-bottom: 0 !important;
+}
+.chat-item > .panel-body {
+	padding: 10px 15px;
+	height: 200px;
+	overflow-y: scroll;
+}
+
+.img-some-friend {
+	width: 40px !important;
+    height: 40px !important;
+    border-radius: 50% !important;
 }

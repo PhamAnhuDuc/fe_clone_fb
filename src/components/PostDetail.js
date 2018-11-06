@@ -77,7 +77,7 @@ class PostDetail extends Component {
                             <i className="fa fa-thumbs-down" aria-hidden="true"></i>
                             <div className = "total">30</div>
                         </div>
-                        <a className="sheare" >Chia sẻ</a>
+                        <a className="sheare" href="Aaa" >Chia sẻ</a>
                     </div>
                     <h5 style={{color: 'red', cursor: 'pointer'}} onClick={ () => this.handlerReply(this.props.match.params.id) } >Comment</h5>
                     <div id={`myDIV`}  >

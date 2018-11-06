@@ -25,9 +25,9 @@ class ContentPost extends Component {
                             <i className="fa fa-cog" aria-hidden="true"></i> <span className="caret" />
                         </button>
                         <ul className="dropdown-menu" aria-labelledby="dropdownMenu1">
-                            <li><a  role="button">Chỉ mình tôi</a></li>
-                            <li><a  role="button">Mọi Người</a></li>
-                            <li><a  role="button">Chỉ bạn bè</a></li>
+                            <li><a href="google.com" role="button">Chỉ mình tôi</a></li>
+                            <li><a href="google.com" role="button">Mọi Người</a></li>
+                            <li><a href="google.com"  role="button">Chỉ bạn bè</a></li>
                         </ul>
                     </div>    
                 <div className="media" >
